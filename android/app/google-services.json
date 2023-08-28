@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "902227265527",
+    "project_id": "my-fun-do-notes",
+    "storage_bucket": "my-fun-do-notes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902227265527:android:b6df398fa287156fdcd0f2",
+        "android_client_info": {
+          "package_name": "com.myfundonotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902227265527-li3q482upf349ivuh3e5ah95dcm06bhm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANMTVJ-TdRpq1MBnygOrwIWNUJdhmhuUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902227265527-li3q482upf349ivuh3e5ah95dcm06bhm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
