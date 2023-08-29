@@ -57,7 +57,7 @@ const SignUp = ({navigation}) => {
   return (
     <View style={styles.screen_container}>
       <Text style={{fontSize: Constant.fontSize.extralarge}}>SignUp</Text>
-      <UserInput placeholder="Enter Name" value={name} setText={setName} />
+      <UserInput placeholder="Enter Name" value={name} setText={setName}/>
       <Text style={{color: 'red'}}>{nameError}</Text>
       <UserInput
         placeholder="Enter Mobile No"
@@ -75,6 +75,7 @@ const SignUp = ({navigation}) => {
         placeholder="Enter Password"
         value={password}
         setText={setPassword}
+        secured={true}
       />
       <Text style={{color: 'red'}}>{passwordError}</Text>
       <UserButton name="SignUp" handleOnPress={handleSignUpPress} />

@@ -5,11 +5,11 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Constant from '../utilities/Constant';
 
-const NotesHeader = ({onPressHandler}) => {
+const NotesHeader = ({handleMenuPress, handleProfilePress, handleProfileBackPress}) => {
   const [text, onChangeText] = useState('');
   return (
     <View style={styles.notes_header}>
-      <TouchableOpacity onPress={onPressHandler}>
+      <TouchableOpacity onPress={handleMenuPress}>
         <EntypoIcon name="menu" size={25} style={styles.header_Content} />
       </TouchableOpacity>
       <TextInput
@@ -25,7 +25,8 @@ const NotesHeader = ({onPressHandler}) => {
           style={styles.header_Content}
         />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+      onPress={handleProfilePress}>
         <Image
           source={require('../assets/a.png')}
           style={styles.header_Content}

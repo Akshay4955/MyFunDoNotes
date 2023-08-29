@@ -46,6 +46,7 @@ const Login = ({navigation}) => {
         placeholder="Enter Password"
         value={password}
         setText={setPassword}
+        secured={true}
       />
       <Text style={{color: 'red'}}>{passwordError}</Text>
       <UserButton name="Login" handleOnPress={handleLoginPress} />
