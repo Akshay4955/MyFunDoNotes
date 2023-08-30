@@ -13,8 +13,8 @@ export const Color = {
 export const borderWidth = {
   // small: 0.7,
   medium: 0.9,
-  // large: 1.1,
-  // extralarge: 1.3,
+  large: 10,
+  extralarge: 50,
 };
 
 export const margin = {
@@ -22,13 +22,14 @@ export const margin = {
   // small: 8,
   medium: 10,
   large: 20,
+  modalMargin: 40,
   auth_screen: 25,
   extralarge: 140,
   headerMargin: 190,
 };
 export const width = {
   verySmall: scaleWidth(25),
-  //   small: scaleWidth(100),
+  small: scaleWidth(50),
   medium: scaleWidth(180),
   large: scaleWidth(250),
   extralarge: scaleWidth(390),
@@ -39,6 +40,7 @@ export const height = {
   small: scaleHeight(50),
   medium: scaleHeight(60),
   large: scaleHeight(90),
+  modalHeight: scaleHeight(300),
   extralarge: scaleHeight(800),
 };
 
