@@ -5,7 +5,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as Constant from '../utilities/Constant';
 
-const NotesHeader = ({handleMenuPress, handleProfilePress, handleProfileBackPress}) => {
+const NotesHeader = ({handleMenuPress, handleProfilePress,}) => {
   const [text, onChangeText] = useState('');
   return (
     <View style={styles.notes_header}>

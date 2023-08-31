@@ -19,7 +19,7 @@ export const borderWidth = {
 
 export const margin = {
   // verysmall: 2,
-  // small: 8,
+  small: 8,
   medium: 10,
   large: 20,
   modalMargin: 40,
@@ -29,7 +29,7 @@ export const margin = {
 };
 export const width = {
   verySmall: scaleWidth(25),
-  small: scaleWidth(50),
+  small: scaleWidth(70),
   medium: scaleWidth(180),
   large: scaleWidth(250),
   extralarge: scaleWidth(390),
@@ -37,10 +37,12 @@ export const width = {
 };
 export const height = {
   verysmall: scaleHeight(25),
+  modalButton: scaleHeight(35),
   small: scaleHeight(50),
+  profilePic: scaleHeight(70),
   medium: scaleHeight(60),
   large: scaleHeight(90),
-  modalHeight: scaleHeight(300),
+  modalHeight: scaleHeight(350),
   extralarge: scaleHeight(800),
 };
 
@@ -48,7 +50,7 @@ export const borderRadius = {
   small: 12,
   //   medium: 20,
   large: 24,
-  //   extralarge: 26,
+  extralarge: 28,
 };
 
 export const fontSize = {

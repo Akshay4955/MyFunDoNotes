@@ -19,7 +19,7 @@ const Notes = ({navigation}) => {
   const handleProfileBackPress = () => {
     setShowModal(false);
   };
-  
+
   return (
     <View style={styles.screen_container}>
       <NotesHeader
