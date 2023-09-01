@@ -5,7 +5,7 @@ import GlobalStyleSheet from '../utilities/GlobalStyleSheet';
 const Archive = () => {
   const styles = GlobalStyleSheet();
   return (
-    <View style= {styles.screen_container}>
+    <View style={styles.screen_container}>
       <Text>Archive</Text>
     </View>
   );

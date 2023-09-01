@@ -6,10 +6,10 @@ import CreateNote from '../screens/CreateNote';
 const Stack = createStackNavigator();
 const AppStack = () => {
   return (
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="AppDrawer" component={AppDrawer} />
-        <Stack.Screen name="CreateNote" component={CreateNote} />
-      </Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="AppDrawer" component={AppDrawer} />
+      <Stack.Screen name="CreateNote" component={CreateNote} />
+    </Stack.Navigator>
   );
 };
 

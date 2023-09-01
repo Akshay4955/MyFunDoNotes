@@ -56,31 +56,31 @@ const SignUp = ({navigation}) => {
   };
   return (
     <View style={styles.screen_container}>
-      <Text style={{fontSize: Constant.fontSize.extralarge}}>SignUp</Text>
+      <Text style={styles.auth_screen_header}>SignUp</Text>
       <UserInput placeholder="Enter Name" value={name} setText={setName} />
-      <Text style={{color: 'red'}}>{nameError}</Text>
+      <Text style={styles.auth_screen_error}>{nameError}</Text>
       <UserInput
         placeholder="Enter Mobile No"
         value={mobileNo}
         setText={setMobileNo}
       />
-      <Text style={{color: 'red'}}>{mobileNoError}</Text>
+      <Text style={styles.auth_screen_error}>{mobileNoError}</Text>
       <UserInput
         placeholder="Enter UserName"
         value={userName}
         setText={setUserName}
       />
-      <Text style={{color: 'red'}}>{emailError}</Text>
+      <Text style={styles.auth_screen_error}>{emailError}</Text>
       <UserInput
         placeholder="Enter Password"
         value={password}
         setText={setPassword}
         secured={true}
       />
-      <Text style={{color: 'red'}}>{passwordError}</Text>
+      <Text style={styles.auth_screen_error}>{passwordError}</Text>
       <UserButton name="SignUp" handleOnPress={handleSignUpPress} />
       <TouchableOpacity onPress={handleHaveAccountPress}>
-        <Text style={{marginTop: Constant.margin.medium}}>
+        <Text style={styles.auth_screen_button}>
           Have an account? Login here.
         </Text>
       </TouchableOpacity>

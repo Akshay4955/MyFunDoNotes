@@ -8,7 +8,6 @@ import {AuthContext} from '../../navigation/AuthenticationProvider';
 import {
   GoogleSignin,
   GoogleSigninButton,
-  statusCodes,
 } from '@react-native-google-signin/google-signin';
 
 const Login = () => {
@@ -49,23 +48,23 @@ const Login = () => {
   }, []);
   return (
     <View style={styles.screen_container}>
-      <Text style={{fontSize: Constant.fontSize.extralarge}}>Welcome</Text>
+      <Text style={styles.auth_screen_header}>Welcome</Text>
       <UserInput
         placeholder="Enter UserName"
         value={userName}
         setText={setUserName}
       />
-      <Text style={{color: 'red'}}>{emailError}</Text>
+      <Text style={styles.auth_screen_error}>{emailError}</Text>
       <UserInput
         placeholder="Enter Password"
         value={password}
         setText={setPassword}
         secured={true}
       />
-      <Text style={{color: 'red'}}>{passwordError}</Text>
+      <Text style={styles.auth_screen_error}>{passwordError}</Text>
       <UserButton name="Login" handleOnPress={handleLoginPress} />
       <GoogleSigninButton
-        style={{marginTop: Constant.margin.medium}}
+        style={styles.auth_screen_button}
         onPress={handleGoogleSignIn}></GoogleSigninButton>
     </View>
   );

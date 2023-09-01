@@ -1,6 +1,5 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
 import Notes from '../screens/Notes';
 import Reminders from '../screens/Reminders';
 import CreateNewLabel from '../screens/CreateNewLabel';
@@ -15,7 +14,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 
 const Drawer = createDrawerNavigator();
 
-const AppDrawer = ({navigation}) => {
+const AppDrawer = () => {
   return (
     <Drawer.Navigator
       initialRouteName="Notes"

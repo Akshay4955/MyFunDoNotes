@@ -14,6 +14,7 @@ import {AuthContext} from '../navigation/AuthenticationProvider';
 import ImagePicker from 'react-native-image-crop-picker';
 import ModalButton from './ModalButton';
 import storage from '@react-native-firebase/storage';
+import UserModal2 from './UserModal2';
 
 const UserModal = ({modalVisibility, handleProfileBackPress}) => {
   const {user, logOut} = useContext(AuthContext);
@@ -21,7 +22,6 @@ const UserModal = ({modalVisibility, handleProfileBackPress}) => {
   const [userData, setUserData] = useState({});
   const getUser = async () => {
     const userDetails = await fetchUser(user?.uid);
-    console.log(userDetails);
     setUserData(userDetails);
   };
   useEffect(() => {
@@ -53,9 +53,7 @@ const UserModal = ({modalVisibility, handleProfileBackPress}) => {
   };
   const submitImage = async imagePath => {
     const imageUrl = imagePath;
-    console.log('Image URL ', imageUrl);
     const fileName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
-    console.log(fileName);
     try {
       const reference = storage().ref(fileName);
       await reference.putFile(imageUrl);
@@ -98,17 +96,12 @@ const UserModal = ({modalVisibility, handleProfileBackPress}) => {
           <Button title="LogOut" onPress={logOut} />
         </View>
       </Modal>
-      <Modal
-        animationType="slide"
-        visible={showModal}
-        onRequestClose={handleBackPress}
-        transparent={true}>
-        <View style={styles.container}>
-          <Text style={styles.modalText}>Add Image</Text>
-          <ModalButton name="Open Camera" handleOnPress={openCamera} />
-          <ModalButton name="Choose Image" handleOnPress={pickImage} />
-        </View>
-      </Modal>
+      <UserModal2
+        modalVisibility={showModal}
+        handleBackPress={handleBackPress}
+        handleOpenCamera={openCamera}
+        handlePickImage={pickImage}
+      />
     </View>
   );
 };
@@ -139,10 +132,6 @@ const styles = StyleSheet.create({
     padding: Constant.padding.medium,
     fontSize: Constant.fontSize.small,
     fontWeight: '300',
-  },
-  modalText: {
-    fontSize: Constant.fontSize.extralarge,
-    fontWeight: 'bold',
   },
 });
 

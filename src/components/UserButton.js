@@ -6,7 +6,7 @@ import * as Constant from '../utilities/Constant';
 const UserButton = ({name, handleOnPress}) => {
   return (
     <TouchableOpacity style={styles.auth_button} onPress={handleOnPress}>
-      <Text style= {styles.auth_button_text}>{name}</Text>
+      <Text style={styles.auth_button_text}>{name}</Text>
     </TouchableOpacity>
   );
 };

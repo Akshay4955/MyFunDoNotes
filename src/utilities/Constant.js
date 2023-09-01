@@ -8,30 +8,30 @@ export const Color = {
   mediumColor: '#27292E',
   lightColor: '#26292E',
   whiteColor: 'white',
+  error: 'red',
 };
 
 export const borderWidth = {
-  // small: 0.7,
   medium: 0.9,
   large: 10,
   extralarge: 50,
 };
 
 export const margin = {
-  // verysmall: 2,
   small: 8,
   medium: 10,
-  large: 20,
+  large: 15,
   modalMargin: 40,
   auth_screen: 25,
   extralarge: 140,
-  headerMargin: 190,
+  headerMargin: 220,
+  footerMargin: 320,
 };
 export const width = {
   verySmall: scaleWidth(25),
   small: scaleWidth(70),
   medium: scaleWidth(180),
-  large: scaleWidth(250),
+  large: scaleWidth(240),
   extralarge: scaleWidth(390),
   full: scaleWidth(410),
 };
@@ -48,7 +48,6 @@ export const height = {
 
 export const borderRadius = {
   small: 12,
-  //   medium: 20,
   large: 24,
   extralarge: 28,
 };
@@ -63,6 +62,4 @@ export const fontSize = {
 export const padding = {
   small: 5,
   medium: 15,
-  // large: 12,
-  // extralarge: 14,
 };
