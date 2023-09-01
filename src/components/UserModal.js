@@ -19,16 +19,14 @@ const UserModal = ({modalVisibility, handleProfileBackPress}) => {
   const {user, logOut} = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [userData, setUserData] = useState({});
-  const [profile, setProfile] = useState('../assets/a.png');
   const getUser = async () => {
     const userDetails = await fetchUser(user?.uid);
     console.log(userDetails);
     setUserData(userDetails);
-    setProfile(userDetails?.profilePic);
   };
   useEffect(() => {
     getUser();
-  }, [user]);
+  }, [user, modalVisibility]);
   const handleProfilePress = () => {
     setShowModal(true);
   };
@@ -41,7 +39,6 @@ const UserModal = ({modalVisibility, handleProfileBackPress}) => {
       height: 300,
       cropping: true,
     }).then(image => {
-      setProfile(image.path);
       submitImage(image.path);
     });
   };
@@ -51,18 +48,18 @@ const UserModal = ({modalVisibility, handleProfileBackPress}) => {
       height: 300,
       cropping: true,
     }).then(image => {
-      setProfile(image.path);
       submitImage(image.path);
     });
   };
-  const submitImage = async () => {
-    const imageUrl = profile;
-    console.log(imageUrl);
+  const submitImage = async imagePath => {
+    const imageUrl = imagePath;
+    console.log('Image URL ', imageUrl);
     const fileName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
     console.log(fileName);
     try {
-      await storage.ref(fileName).putFile(imageUrl);
-      const downloadURL = await storage.ref(fileName).getDownloadURL();
+      const reference = storage().ref(fileName);
+      await reference.putFile(imageUrl);
+      const downloadURL = await reference.getDownloadURL();
       updateUser(user?.uid, downloadURL);
     } catch (error) {
       console.log(error);
@@ -78,12 +75,15 @@ const UserModal = ({modalVisibility, handleProfileBackPress}) => {
         <View style={styles.container}>
           <TouchableOpacity onPress={handleProfilePress}>
             {user?.photoURL ? (
-              <Image source={{uri: user?.photoURL}} style={styles.profile_pic} />
+              <Image
+                source={{uri: user?.photoURL}}
+                style={styles.profile_pic}
+              />
             ) : (
               <Image
                 source={
                   userData?.profilePic
-                    ? {uri: userData?.profilePic}
+                    ? {uri: userData.profilePic}
                     : require('../assets/a.png')
                 }
                 style={styles.profile_pic}

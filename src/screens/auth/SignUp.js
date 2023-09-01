@@ -48,7 +48,7 @@ const SignUp = ({navigation}) => {
   };
   const handleSignUpPress = () => {
     if (validateInput()) {
-      signUp(name, mobileNo, userName, password)
+      signUp(name, mobileNo, userName, password);
     }
   };
   const handleHaveAccountPress = () => {
@@ -57,7 +57,7 @@ const SignUp = ({navigation}) => {
   return (
     <View style={styles.screen_container}>
       <Text style={{fontSize: Constant.fontSize.extralarge}}>SignUp</Text>
-      <UserInput placeholder="Enter Name" value={name} setText={setName}/>
+      <UserInput placeholder="Enter Name" value={name} setText={setName} />
       <Text style={{color: 'red'}}>{nameError}</Text>
       <UserInput
         placeholder="Enter Mobile No"

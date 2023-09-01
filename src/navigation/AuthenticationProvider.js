@@ -1,4 +1,3 @@
-import {View, Text} from 'react-native';
 import {createContext, useState} from 'react';
 import {addUser} from '../services/UserServices';
 import auth from '@react-native-firebase/auth';

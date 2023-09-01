@@ -11,7 +11,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 
-const Login = ({navigation}) => {
+const Login = () => {
   const styles = GlobalStyleSheet();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');

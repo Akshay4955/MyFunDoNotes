@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React from 'react';
 import {TextInput} from 'react-native-gesture-handler';
 import * as Constant from '../utilities/Constant';

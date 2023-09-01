@@ -19,5 +19,5 @@ export const fetchUser = async userUid => {
     });
 };
 export const updateUser = async (userUid, profilePic) => {
-  await usersCollection.doc(userUid).update(profilePic);
+  await usersCollection.doc(userUid).update({profilePic});
 };
