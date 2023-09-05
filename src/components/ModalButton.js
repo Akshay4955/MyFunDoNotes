@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: Constant.margin.medium,
-    borderWidth: Constant.borderWidth.medium,
+    borderWidth: Constant.borderWidth.small,
     borderColor: Constant.Color.whiteColor,
     borderRadius: Constant.borderRadius.large,
     height: Constant.height.modalButton,

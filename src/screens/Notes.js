@@ -1,4 +1,12 @@
-import {View, Text, TextInput, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  RefreshControl,
+} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -11,16 +19,33 @@ import UserModal from '../components/UserModal';
 import {fetchNotes} from '../services/NotesServices';
 import {fetchUser} from '../services/UserServices';
 import {AuthContext} from '../navigation/AuthenticationProvider';
+import NoteCard from '../components/NoteCard';
 
 const Notes = ({navigation}) => {
   const {user} = useContext(AuthContext);
   const [userData, setUserData] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [text, onChangeText] = useState('');
+  const [pinnedNotes, setPinnedNotes] = useState([]);
+  const [otherNotes, setOtherNotes] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
   const styles = GlobalStyleSheet();
   const getNotes = async () => {
     const fetchedNotes = await fetchNotes(user?.uid);
-    console.log(fetchedNotes);
+    const fetchedPinnedNotes = fetchedNotes?.filter(
+      note =>
+        note.pinnedData === true &&
+        note.archiveData === false &&
+        note.deleteData === false,
+    );
+    setPinnedNotes(fetchedPinnedNotes);
+    const fetchedOtherNotes = fetchedNotes?.filter(
+      note =>
+        note.pinnedData === false &&
+        note.archiveData === false &&
+        note.deleteData === false,
+    );
+    setOtherNotes(fetchedOtherNotes);
   };
   const getUser = async () => {
     const userDetails = await fetchUser(user?.uid);
@@ -28,7 +53,7 @@ const Notes = ({navigation}) => {
   };
   useEffect(() => {
     getNotes();
-  }, [fetchNotes]);
+  }, [navigation]);
   useEffect(() => {
     getUser();
   }, [user, handleProfilePress]);
@@ -41,8 +66,18 @@ const Notes = ({navigation}) => {
   const handleProfileBackPress = () => {
     setShowModal(false);
   };
-  const onHandleAddNote = () => {
-    navigation.navigate('CreateNote');
+  const handleAddNote = () => {
+    navigation.navigate('CreateNote', {editData: {}, noteId: ''});
+  };
+  const handleEditNote = item => {
+    navigation.navigate('CreateNote', {editData: item, noteId: item.id});
+  };
+  const handleRefresh = () => {
+    setRefreshing(true);
+    setTimeout(() => {
+      getNotes();
+      setRefreshing(false);
+    }, 2000);
   };
   return (
     <View style={styles.screen_container}>
@@ -85,7 +120,38 @@ const Notes = ({navigation}) => {
         modalVisibility={showModal}
         handleProfileBackPress={handleProfileBackPress}
       />
-      <Text style={{flex: 1}}></Text>
+      <View style={styles.notes_container}>
+        <Text style={styles.note_type}>Pinned</Text>
+        <FlatList
+          data={pinnedNotes}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              onPress={() => {
+                handleEditNote(item);
+              }}>
+              <NoteCard title={item.title} data={item.data} />
+            </TouchableOpacity>
+          )}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+          }
+        />
+        <Text style={styles.note_type}>Other</Text>
+        <FlatList
+          data={otherNotes}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              onPress={() => {
+                handleEditNote(item);
+              }}>
+              <NoteCard title={item.title} data={item.data} />
+            </TouchableOpacity>
+          )}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+          }
+        />
+      </View>
       <View style={styles.notes_footer}>
         <TouchableOpacity>
           <AntDesignIcon
@@ -111,7 +177,7 @@ const Notes = ({navigation}) => {
             style={styles.notes_content}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={onHandleAddNote}>
+        <TouchableOpacity onPress={handleAddNote}>
           <IonIcon name="add" size={70} style={styles.notes_add_icon} />
         </TouchableOpacity>
       </View>

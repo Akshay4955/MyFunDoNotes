@@ -58,6 +58,17 @@ const GlobalStyleSheet = () => {
       fontSize: Constant.fontSize.large,
       marginLeft: Constant.margin.medium,
     },
+    notes_container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: Constant.Color.backgroundColor,
+    },
+    note_type: {
+      fontSize: Constant.fontSize.medium,
+      textAlign: 'left',
+      marginLeft: Constant.margin.small,
+    },
     notes_add_icon: {
       marginLeft: Constant.margin.extralarge,
       marginBottom: Constant.margin.large,
@@ -67,6 +78,12 @@ const GlobalStyleSheet = () => {
       width: Constant.width.verySmall,
       margin: Constant.margin.medium,
       borderRadius: Constant.borderRadius.small,
+    },
+    notes_container: {
+      flex: 1,
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+      backgroundColor: Constant.Color.backgroundColor,
     },
     notes_footer: {
       flexDirection: 'row',

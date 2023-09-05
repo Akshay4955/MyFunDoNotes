@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: Constant.Color.activeBackgorundColor,
     width: Constant.width.medium,
     height: Constant.height.small,
-    borderWidth: Constant.borderWidth.medium,
+    borderWidth: Constant.borderWidth.small,
     borderRadius: Constant.borderRadius.large,
     marginTop: Constant.margin.auth_screen,
   },

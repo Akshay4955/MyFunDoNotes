@@ -12,7 +12,8 @@ export const Color = {
 };
 
 export const borderWidth = {
-  medium: 0.9,
+  small: 0.9,
+  medium: 2,
   large: 10,
   extralarge: 50,
 };
@@ -42,6 +43,8 @@ export const height = {
   profilePic: scaleHeight(70),
   medium: scaleHeight(60),
   large: scaleHeight(90),
+  noteHeight: scaleHeight(100),
+  modal3Height: scaleHeight(200),
   modalHeight: scaleHeight(350),
   extralarge: scaleHeight(800),
 };
@@ -53,6 +56,7 @@ export const borderRadius = {
 };
 
 export const fontSize = {
+  verySmall: scaleSize(12),
   small: scaleSize(16),
   medium: scaleSize(20),
   large: scaleSize(24),
