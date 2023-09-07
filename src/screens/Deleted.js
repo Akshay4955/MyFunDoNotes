@@ -31,7 +31,7 @@ const Deleted = ({navigation}) => {
   };
   useEffect(() => {
     getNotes();
-  }, [navigation]);
+  }, [showModal]);
   const handleMenuPress = () => {
     navigation.openDrawer();
   };

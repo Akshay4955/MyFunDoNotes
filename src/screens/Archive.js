@@ -26,7 +26,7 @@ const Archive = ({navigation}) => {
   };
   useEffect(() => {
     getNotes();
-  }, [navigation]);
+  }, [handleEditNote]);
   const handleMenuPress = () => {
     navigation.openDrawer();
   };

@@ -53,7 +53,7 @@ const Notes = ({navigation}) => {
   };
   useEffect(() => {
     getNotes();
-  }, [navigation]);
+  }, [handleAddNote, handleEditNote]);
   useEffect(() => {
     getUser();
   }, [user, handleProfilePress]);

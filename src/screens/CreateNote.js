@@ -31,7 +31,7 @@ const CreateNote = ({route, navigation}) => {
         noteId,
       );
     } else {
-      if (text == '' && noteText == '') {
+      if (text === '' && noteText === '') {
       } else {
         addNote(user?.uid, text, noteText, pinnedData, archiveData, deleteData);
       }
