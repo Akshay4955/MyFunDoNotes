@@ -20,6 +20,8 @@ import {fetchNotes} from '../services/NotesServices';
 import {fetchUser} from '../services/UserServices';
 import {AuthContext} from '../navigation/AuthenticationProvider';
 import NoteCard from '../components/NoteCard';
+import {viewChange} from '../services/redux/Action';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Notes = ({navigation}) => {
   const {user} = useContext(AuthContext);
@@ -30,6 +32,9 @@ const Notes = ({navigation}) => {
   const [otherNotes, setOtherNotes] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const styles = GlobalStyleSheet();
+  const dispatch = useDispatch();
+  const gridView = useSelector(state => state.reducer);
+
   const getNotes = async () => {
     const fetchedNotes = await fetchNotes(user?.uid);
     const fetchedPinnedNotes = fetchedNotes?.filter(
@@ -79,6 +84,9 @@ const Notes = ({navigation}) => {
       setRefreshing(false);
     }, 2000);
   };
+  const handleTogglingOfView = () => {
+    dispatch(viewChange());
+  };
   return (
     <View style={styles.screen_container}>
       <View style={styles.notes_header}>
@@ -91,7 +99,7 @@ const Notes = ({navigation}) => {
           placeholder="Search your notes"
           value={text}
         />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleTogglingOfView}>
           <MaterialIcon
             name="view-agenda-outline"
             size={25}
@@ -124,6 +132,8 @@ const Notes = ({navigation}) => {
         <Text style={styles.note_type}>Pinned</Text>
         <FlatList
           data={pinnedNotes}
+          numColumns={gridView ? 2 : 1}
+          key={gridView ? 2 : 1}
           renderItem={({item}) => (
             <TouchableOpacity
               onPress={() => {
@@ -136,9 +146,12 @@ const Notes = ({navigation}) => {
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
           }
         />
+
         <Text style={styles.note_type}>Other</Text>
         <FlatList
           data={otherNotes}
+          numColumns={gridView ? 2 : 1}
+          key={gridView ? 3 : 4}
           renderItem={({item}) => (
             <TouchableOpacity
               onPress={() => {

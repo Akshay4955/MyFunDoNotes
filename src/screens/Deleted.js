@@ -12,8 +12,8 @@ import {fetchNotes} from '../services/NotesServices';
 import NoteCard from '../components/NoteCard';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import * as Constant from '../utilities/Constant';
-import UserModal3 from '../components/UserModal3';
 import UserModal4 from '../components/UserModal4';
+import {useSelector} from 'react-redux';
 
 const Deleted = ({navigation}) => {
   const {user} = useContext(AuthContext);
@@ -22,6 +22,7 @@ const Deleted = ({navigation}) => {
   const [showModal, setShowModal] = useState(false);
   const [deleteNoteId, setDeleteNoteId] = useState('');
   const styles = GlobalStyleSheet();
+  const gridView = useSelector(state => state.reducer);
   const getNotes = async () => {
     const fetchedNotes = await fetchNotes(user?.uid);
     const fetchedDeletedNotes = fetchedNotes?.filter(
@@ -64,6 +65,8 @@ const Deleted = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <FlatList
+        numColumns={gridView ? 2 : 1}
+        key={gridView ? 2 : 1}
         data={deletedNotes}
         renderItem={({item}) => (
           <TouchableOpacity
