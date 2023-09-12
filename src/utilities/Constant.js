@@ -19,6 +19,7 @@ export const borderWidth = {
 };
 
 export const margin = {
+  verySmall: 5,
   small: 8,
   medium: 10,
   large: 15,
@@ -33,6 +34,7 @@ export const width = {
   small: scaleWidth(70),
   medium: scaleWidth(180),
   large: scaleWidth(240),
+  label: scaleWidth(300),
   extralarge: scaleWidth(390),
   full: scaleWidth(410),
 };

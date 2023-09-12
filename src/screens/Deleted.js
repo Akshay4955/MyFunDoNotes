@@ -18,7 +18,6 @@ import {useSelector} from 'react-redux';
 const Deleted = ({navigation}) => {
   const {user} = useContext(AuthContext);
   const [deletedNotes, setDeletedNotes] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [deleteNoteId, setDeleteNoteId] = useState('');
   const styles = GlobalStyleSheet();
@@ -31,20 +30,15 @@ const Deleted = ({navigation}) => {
     setDeletedNotes(fetchedDeletedNotes);
   };
   useEffect(() => {
-    getNotes();
-  }, [showModal]);
+    navigation.addListener('focus', () => {
+      getNotes();
+    });
+  }, []);
   const handleMenuPress = () => {
     navigation.openDrawer();
   };
   const handleEditNote = item => {
     navigation.navigate('CreateNote', {editData: item, noteId: item.id});
-  };
-  const handleRefresh = () => {
-    setRefreshing(true);
-    setTimeout(() => {
-      getNotes();
-      setRefreshing(false);
-    }, 2000);
   };
   const handleLongPress = item => {
     setDeleteNoteId(item.id);
@@ -84,9 +78,6 @@ const Deleted = ({navigation}) => {
             <NoteCard title={item.title} data={item.data} />
           </TouchableOpacity>
         )}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-        }
       />
     </View>
   );

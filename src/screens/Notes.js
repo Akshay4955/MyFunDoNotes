@@ -20,7 +20,7 @@ import {fetchNotes} from '../services/NotesServices';
 import {fetchUser} from '../services/UserServices';
 import {AuthContext} from '../navigation/AuthenticationProvider';
 import NoteCard from '../components/NoteCard';
-import {viewChange} from '../services/redux/Action';
+import {viewChange} from '../redux/Action';
 import {useDispatch, useSelector} from 'react-redux';
 
 const Notes = ({navigation}) => {
@@ -30,7 +30,6 @@ const Notes = ({navigation}) => {
   const [text, onChangeText] = useState('');
   const [pinnedNotes, setPinnedNotes] = useState([]);
   const [otherNotes, setOtherNotes] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
   const styles = GlobalStyleSheet();
   const dispatch = useDispatch();
   const gridView = useSelector(state => state.reducer);
@@ -57,11 +56,11 @@ const Notes = ({navigation}) => {
     setUserData(userDetails);
   };
   useEffect(() => {
-    getNotes();
-  }, [handleAddNote, handleEditNote]);
-  useEffect(() => {
-    getUser();
-  }, [user, handleProfilePress]);
+    navigation.addListener('focus', () => {
+      getNotes();
+      getUser();
+    });
+  }, [user]);
   const handleMenuPress = () => {
     navigation.openDrawer();
   };
@@ -76,13 +75,6 @@ const Notes = ({navigation}) => {
   };
   const handleEditNote = item => {
     navigation.navigate('CreateNote', {editData: item, noteId: item.id});
-  };
-  const handleRefresh = () => {
-    setRefreshing(true);
-    setTimeout(() => {
-      getNotes();
-      setRefreshing(false);
-    }, 2000);
   };
   const handleTogglingOfView = () => {
     dispatch(viewChange());
@@ -142,9 +134,6 @@ const Notes = ({navigation}) => {
               <NoteCard title={item.title} data={item.data} />
             </TouchableOpacity>
           )}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-          }
         />
 
         <Text style={styles.note_type}>Other</Text>
@@ -160,9 +149,6 @@ const Notes = ({navigation}) => {
               <NoteCard title={item.title} data={item.data} />
             </TouchableOpacity>
           )}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-          }
         />
       </View>
       <View style={styles.notes_footer}>

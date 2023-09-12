@@ -40,7 +40,7 @@ export const updateNote = async (
   deleteData,
   noteId,
 ) => {
-  usersCollection.doc(uid).collection('Notes').doc(noteId).update({
+  await usersCollection.doc(uid).collection('Notes').doc(noteId).update({
     title: title,
     data: data,
     pinnedData: pinnedData,
@@ -49,5 +49,5 @@ export const updateNote = async (
   });
 };
 export const deleteNote = async (uid, noteId) => {
-  usersCollection.doc(uid).collection('Notes').doc(noteId).delete();
+  await usersCollection.doc(uid).collection('Notes').doc(noteId).delete();
 };

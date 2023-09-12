@@ -27,20 +27,15 @@ const Archive = ({navigation}) => {
     setArchivedNotes(fetchedArchivedNotes);
   };
   useEffect(() => {
-    getNotes();
-  }, [handleEditNote]);
+    navigation.addListener('focus', () => {
+      getNotes();
+    });
+  }, []);
   const handleMenuPress = () => {
     navigation.openDrawer();
   };
   const handleEditNote = item => {
     navigation.navigate('CreateNote', {editData: item, noteId: item.id});
-  };
-  const handleRefresh = () => {
-    setRefreshing(true);
-    setTimeout(() => {
-      getNotes();
-      setRefreshing(false);
-    }, 2000);
   };
   return (
     <View style={styles.screen_container}>
@@ -62,9 +57,6 @@ const Archive = ({navigation}) => {
             <NoteCard title={item.title} data={item.data} />
           </TouchableOpacity>
         )}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-        }
       />
     </View>
   );
