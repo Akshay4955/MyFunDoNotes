@@ -11,13 +11,14 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
 import * as Constant from '../utilities/Constant';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import CustomDrawer from '../components/CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 
 const AppDrawer = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="Notes"
+      drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
         drawerStyle: {
@@ -28,125 +29,13 @@ const AppDrawer = () => {
         drawerInactiveBackgroundColor: Constant.Color.mediumColor,
         drawerInactiveTintColor: Constant.Color.inActiveTintColor,
       }}>
-      <Drawer.Screen
-        name="Notes"
-        component={Notes}
-        options={{
-          drawerIcon: focused => (
-            <AntIcon
-              name="bulb1"
-              size={25}
-              color={
-                focused
-                  ? Constant.Color.activeTintColor
-                  : Constant.Color.inActiveTintColor
-              }
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Reminders"
-        component={Reminders}
-        options={{
-          drawerIcon: focused => (
-            <AntIcon
-              name="bells"
-              size={25}
-              color={
-                focused
-                  ? Constant.Color.activeTintColor
-                  : Constant.Color.inActiveTintColor
-              }
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Create New Label"
-        component={CreateNewLabel}
-        options={{
-          drawerIcon: focused => (
-            <AntIcon
-              name="plus"
-              size={25}
-              color={
-                focused
-                  ? Constant.Color.activeTintColor
-                  : Constant.Color.inActiveTintColor
-              }
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Archive"
-        component={Archive}
-        options={{
-          drawerIcon: focused => (
-            <FoundationIcon
-              name="archive"
-              size={25}
-              color={
-                focused
-                  ? Constant.Color.activeTintColor
-                  : Constant.Color.inActiveTintColor
-              }
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Deleted"
-        component={Deleted}
-        options={{
-          drawerIcon: focused => (
-            <AntIcon
-              name="delete"
-              size={25}
-              color={
-                focused
-                  ? Constant.Color.activeTintColor
-                  : Constant.Color.inActiveTintColor
-              }
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          drawerIcon: focused => (
-            <AntIcon
-              name="setting"
-              size={25}
-              color={
-                focused
-                  ? Constant.Color.activeTintColor
-                  : Constant.Color.inActiveTintColor
-              }
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Help & Feedback"
-        component={HelpAndFeedback}
-        options={{
-          drawerIcon: focused => (
-            <IonIcon
-              name="help-circle"
-              size={25}
-              color={
-                focused
-                  ? Constant.Color.activeTintColor
-                  : Constant.Color.inActiveTintColor
-              }
-            />
-          ),
-        }}
-      />
+      <Drawer.Screen name="Notes" component={Notes} />
+      <Drawer.Screen name="Reminders" component={Reminders} />
+      <Drawer.Screen name="Create New Label" component={CreateNewLabel} />
+      <Drawer.Screen name="Archive" component={Archive} />
+      <Drawer.Screen name="Deleted" component={Deleted} />
+      <Drawer.Screen name="Settings" component={Settings} />
+      <Drawer.Screen name="Help & Feedback" component={HelpAndFeedback} />
     </Drawer.Navigator>
   );
 };
