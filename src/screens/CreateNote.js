@@ -1,4 +1,4 @@
-import {View, TextInput, TouchableOpacity} from 'react-native';
+import {View, TextInput, TouchableOpacity, FlatList, Text} from 'react-native';
 import React, {useContext, useState} from 'react';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
@@ -8,9 +8,13 @@ import {addNote, updateNote} from '../services/NotesServices';
 import * as Constant from '../utilities/Constant';
 import {AuthContext} from '../navigation/AuthenticationProvider';
 import UserModal3 from '../components/UserModal3';
+import {useRoute} from '@react-navigation/native';
+import {Chip} from 'react-native-paper';
 
-const CreateNote = ({route, navigation}) => {
-  const {editData, noteId} = route.params;
+const CreateNote = ({navigation}) => {
+  const route = useRoute();
+  const editData = route?.params.editData;
+  const noteId = route?.params.noteId;
   const {user} = useContext(AuthContext);
   const styles = GlobalStyleSheet();
   const [text, setText] = useState(editData.title || '');
@@ -29,11 +33,20 @@ const CreateNote = ({route, navigation}) => {
         archiveData,
         deleteData,
         noteId,
+        editData.selectedLabels,
       );
     } else {
       if (text === '' && noteText === '') {
       } else {
-        addNote(user?.uid, text, noteText, pinnedData, archiveData, deleteData);
+        addNote(
+          user?.uid,
+          text,
+          noteText,
+          pinnedData,
+          archiveData,
+          deleteData,
+          editData.selectedLabels,
+        );
       }
     }
     navigation.goBack();
@@ -80,20 +93,38 @@ const CreateNote = ({route, navigation}) => {
           />
         </TouchableOpacity>
       </View>
-      <View style={styles.createNote_title_container}>
+      <View>
         <TextInput
           style={styles.createNote_title_text}
           onChangeText={setText}
           placeholder="Title"
           value={text}></TextInput>
       </View>
-      <View style={styles.createNote_note_container}>
+      <View>
         <TextInput
           style={styles.createNote_note_content}
           multiline
           onChangeText={setNoteText}
           placeholder="Note"
           value={noteText}></TextInput>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          alignSelf: 'flex-start',
+        }}>
+        {editData.selectedLabels?.map(item => (
+          <Chip
+            children={item.Label}
+            style={{
+              marginLeft: Constant.margin.verySmall,
+              height: Constant.height.modalButton,
+              backgroundColor: Constant.Color.activeTintColor,
+            }}
+          />
+        ))}
       </View>
       <View style={styles.create_note_footer}>
         <TouchableOpacity>
@@ -113,6 +144,9 @@ const CreateNote = ({route, navigation}) => {
           handleBackPress={handleOptionBackPress}
           setDeleteData={setDeleteData}
           deleteData={deleteData}
+          navigation={navigation}
+          editData={editData}
+          noteId={noteId}
         />
       </View>
     </View>

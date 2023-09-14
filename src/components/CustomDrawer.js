@@ -1,4 +1,10 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  View,
+} from 'react-native';
 import React from 'react';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
@@ -11,7 +17,7 @@ import {FlatList} from 'react-native-gesture-handler';
 const CustomDrawer = ({navigation}) => {
   receivedLabels = useSelector(data => data.LabelReducer);
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} nestedScrollEnabled={true}>
       <Text style={styles.header}>Fun Do Notes</Text>
       <TouchableOpacity
         style={styles.screen}
@@ -51,7 +57,7 @@ const CustomDrawer = ({navigation}) => {
           <Text style={styles.screen_text}>Create New Label</Text>
         </TouchableOpacity>
       ) : (
-        <View style={styles.create_label_conteiner}>
+        <View style={styles.create_label_container}>
           <FlatList
             data={receivedLabels}
             renderItem={({item}) => (
@@ -124,7 +130,7 @@ const CustomDrawer = ({navigation}) => {
         />
         <Text style={styles.screen_text}>Help & Feedback</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -152,7 +158,7 @@ const styles = StyleSheet.create({
     marginLeft: Constant.margin.medium,
     fontSize: Constant.fontSize.small,
   },
-  create_label_conteiner: {
+  create_label_container: {
     borderColor: Constant.Color.activeTintColor,
     borderTopWidth: Constant.borderWidth.small,
     borderBottomWidth: Constant.borderWidth.small,

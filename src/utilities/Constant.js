@@ -46,7 +46,7 @@ export const height = {
   medium: scaleHeight(60),
   large: scaleHeight(90),
   noteHeight: scaleHeight(100),
-  modal3Height: scaleHeight(200),
+  modal3Height: scaleHeight(250),
   modalHeight: scaleHeight(350),
   extralarge: scaleHeight(800),
 };

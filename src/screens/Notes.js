@@ -5,7 +5,6 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-  RefreshControl,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
@@ -131,7 +130,11 @@ const Notes = ({navigation}) => {
               onPress={() => {
                 handleEditNote(item);
               }}>
-              <NoteCard title={item.title} data={item.data} />
+              <NoteCard
+                title={item.title}
+                data={item.data}
+                labels={item.selectedLabels}
+              />
             </TouchableOpacity>
           )}
         />
@@ -146,7 +149,11 @@ const Notes = ({navigation}) => {
               onPress={() => {
                 handleEditNote(item);
               }}>
-              <NoteCard title={item.title} data={item.data} />
+              <NoteCard
+                title={item.title}
+                data={item.data}
+                labels={item.selectedLabels}
+              />
             </TouchableOpacity>
           )}
         />

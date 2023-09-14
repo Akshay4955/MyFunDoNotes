@@ -52,7 +52,7 @@ const CreateNewLabel = ({navigation}) => {
     setSelectedLabelId(id);
   };
   return (
-    <View style={[styles.screen_container, {justifyContent: 'flex-start'}]}>
+    <View style={styles.screen_container}>
       <View style={styles.create_note_header}>
         <TouchableOpacity onPress={handleBackPress}>
           <AntIcon name="arrowleft" size={25} style={styles.notes_content} />

@@ -8,6 +8,7 @@ export const addNote = async (
   pinnedData,
   archiveData,
   deleteData,
+  selectedLabels,
 ) => {
   usersCollection.doc(uid).collection('Notes').add({
     title: title,
@@ -15,6 +16,7 @@ export const addNote = async (
     pinnedData: pinnedData,
     archiveData: archiveData,
     deleteData: deleteData,
+    selectedLabels: selectedLabels,
   });
 };
 export const fetchNotes = async uid => {
@@ -39,6 +41,7 @@ export const updateNote = async (
   archiveData,
   deleteData,
   noteId,
+  selectedLabels,
 ) => {
   await usersCollection.doc(uid).collection('Notes').doc(noteId).update({
     title: title,
@@ -46,6 +49,7 @@ export const updateNote = async (
     pinnedData: pinnedData,
     archiveData: archiveData,
     deleteData: deleteData,
+    selectedLabels: selectedLabels,
   });
 };
 export const deleteNote = async (uid, noteId) => {

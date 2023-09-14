@@ -2,13 +2,23 @@ import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import * as Constant from '../utilities/Constant';
 import {useSelector} from 'react-redux';
+import {Chip} from 'react-native-paper';
 
-const NoteCard = ({title, data}) => {
+const NoteCard = ({title, data, labels}) => {
   const gridVIew = useSelector(state => state.reducer);
   return (
     <View style={gridVIew ? styles.note_container_grid : styles.note_container}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.note}>{data}</Text>
+      <Text style={styles.title} numberOfLines={1}>
+        {title}
+      </Text>
+      <Text style={styles.note} numberOfLines={gridVIew ? 3 : 5}>
+        {data}
+      </Text>
+      <View style={styles.chipContainer}>
+        {labels?.map(item => (
+          <Chip children={item.Label} style={styles.chip} />
+        ))}
+      </View>
     </View>
   );
 };
@@ -38,6 +48,15 @@ const styles = StyleSheet.create({
   note: {
     fontSize: Constant.fontSize.verySmall,
     padding: Constant.padding.small,
+  },
+  chipContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    marginVertical: 2,
+    marginRight: 4,
+    backgroundColor: Constant.Color.activeTintColor,
   },
 });
 

@@ -30,27 +30,16 @@ const GlobalStyleSheet = () => {
       height: Constant.height.small,
       width: Constant.width.extralarge,
     },
-    createNote_note_container: {
-      flex: 1,
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
-    },
     createNote_note_content: {
       marginLeft: Constant.margin.large,
       fontSize: Constant.fontSize.small,
       width: Constant.width.full,
-      height: Constant.height.extralarge,
       paddingVertical: 10,
       paddingHorizontal: 10,
       position: 'relative',
       textAlignVertical: 'top',
     },
-    createNote_title_container: {
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-      width: Constant.width.extralarge,
-      height: Constant.height.small,
-    },
+
     createNote_title_text: {
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
@@ -116,6 +105,13 @@ const GlobalStyleSheet = () => {
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: Constant.Color.backgroundColor,
+    },
+    label_text: {
+      fontSize: Constant.fontSize.small,
+      fontWeight: '300',
+      color: Constant.Color.whiteColor,
+      width: Constant.width.label,
+      marginLeft: Constant.margin.medium,
     },
   });
 };
