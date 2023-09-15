@@ -10,6 +10,9 @@ import {AuthContext} from '../navigation/AuthenticationProvider';
 import UserModal3 from '../components/UserModal3';
 import {useRoute} from '@react-navigation/native';
 import {Chip} from 'react-native-paper';
+import UserModal5 from '../components/UserModal5';
+import MomentTime from '../components/MomentTime';
+import PushNotification from 'react-native-push-notification';
 
 const CreateNote = ({navigation}) => {
   const route = useRoute();
@@ -23,6 +26,15 @@ const CreateNote = ({navigation}) => {
   const [archiveData, setArchiveData] = useState(editData.archiveData || false);
   const [deleteData, setDeleteData] = useState(editData.deleteData || false);
   const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
+  const [date, setDate] = useState(editData?.reminderDate || {});
+  const [labels, setLabels] = useState(editData.selectedLabels || []);
+  let newDate;
+  {
+    date === editData?.reminderDate && JSON.stringify(date) !== '{}'
+      ? (newDate = date.toDate())
+      : newDate;
+  }
   const handleBackPress = () => {
     if (noteId) {
       updateNote(
@@ -33,7 +45,8 @@ const CreateNote = ({navigation}) => {
         archiveData,
         deleteData,
         noteId,
-        editData.selectedLabels,
+        labels,
+        date,
       );
     } else {
       if (text === '' && noteText === '') {
@@ -45,17 +58,29 @@ const CreateNote = ({navigation}) => {
           pinnedData,
           archiveData,
           deleteData,
-          editData.selectedLabels,
+          labels,
+          date,
         );
       }
     }
     navigation.goBack();
+    if (JSON.stringify(date) !== '{}') {
+      PushNotification.localNotificationSchedule({
+        channelId: 'notes-channel',
+        title: 'You saved note',
+        date: date === editData?.reminderDate ? newDate : date,
+        message: 'message sent successfully',
+      });
+    }
   };
   const handleOptionPress = () => {
     setShowModal(true);
   };
   const handleOptionBackPress = () => {
     setShowModal(false);
+  };
+  const handleReminderPress = () => {
+    setShowModal2(true);
   };
   return (
     <View style={styles.screen_container}>
@@ -77,7 +102,7 @@ const CreateNote = ({navigation}) => {
             }
           />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleReminderPress}>
           <AntIcon name="bells" size={25} style={styles.notes_content} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setArchiveData(!archiveData)}>
@@ -108,23 +133,15 @@ const CreateNote = ({navigation}) => {
           placeholder="Note"
           value={noteText}></TextInput>
       </View>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-          alignSelf: 'flex-start',
-        }}>
+      <View style={styles.chipContainer}>
         {editData.selectedLabels?.map(item => (
-          <Chip
-            children={item.Label}
-            style={{
-              marginLeft: Constant.margin.verySmall,
-              height: Constant.height.modalButton,
-              backgroundColor: Constant.Color.activeTintColor,
-            }}
-          />
+          <Chip key={item.id} children={item.Label} style={styles.chip} />
         ))}
+        {newDate ? (
+          <Chip children={<MomentTime time={newDate} />} style={styles.chip} />
+        ) : (
+          <></>
+        )}
       </View>
       <View style={styles.create_note_footer}>
         <TouchableOpacity>
@@ -147,6 +164,11 @@ const CreateNote = ({navigation}) => {
           navigation={navigation}
           editData={editData}
           noteId={noteId}
+        />
+        <UserModal5
+          modalVisibility={showModal2}
+          setModal={setShowModal2}
+          setDate={setDate}
         />
       </View>
     </View>

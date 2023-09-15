@@ -45,7 +45,7 @@ export const height = {
   profilePic: scaleHeight(70),
   medium: scaleHeight(60),
   large: scaleHeight(90),
-  noteHeight: scaleHeight(100),
+  noteHeight: scaleHeight(150),
   modal3Height: scaleHeight(250),
   modalHeight: scaleHeight(350),
   extralarge: scaleHeight(800),

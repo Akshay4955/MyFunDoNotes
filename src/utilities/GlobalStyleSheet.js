@@ -113,6 +113,17 @@ const GlobalStyleSheet = () => {
       width: Constant.width.label,
       marginLeft: Constant.margin.medium,
     },
+    chipContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignSelf: 'flex-start',
+    },
+    chip: {
+      marginLeft: Constant.margin.verySmall,
+      height: Constant.height.modalButton,
+      backgroundColor: Constant.Color.activeTintColor,
+    },
   });
 };
 

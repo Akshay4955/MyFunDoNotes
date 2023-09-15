@@ -3,9 +3,17 @@ import React from 'react';
 import * as Constant from '../utilities/Constant';
 import {useSelector} from 'react-redux';
 import {Chip} from 'react-native-paper';
+import MomentTime from './MomentTime';
 
-const NoteCard = ({title, data, labels}) => {
+const NoteCard = ({title, data, labels, reminderDate}) => {
   const gridVIew = useSelector(state => state.reducer);
+
+  let newDate;
+  {
+    JSON.stringify(reminderDate) !== '{}' && reminderDate
+      ? (newDate = reminderDate.toDate())
+      : newDate;
+  }
   return (
     <View style={gridVIew ? styles.note_container_grid : styles.note_container}>
       <Text style={styles.title} numberOfLines={1}>
@@ -16,8 +24,13 @@ const NoteCard = ({title, data, labels}) => {
       </Text>
       <View style={styles.chipContainer}>
         {labels?.map(item => (
-          <Chip children={item.Label} style={styles.chip} />
+          <Chip key={item.id} children={item.Label} style={styles.chip} />
         ))}
+        {newDate ? (
+          <Chip children={<MomentTime time={newDate} />} style={styles.chip} />
+        ) : (
+          <></>
+        )}
       </View>
     </View>
   );
@@ -55,7 +68,7 @@ const styles = StyleSheet.create({
   },
   chip: {
     marginVertical: 2,
-    marginRight: 4,
+    marginRight: 2,
     backgroundColor: Constant.Color.activeTintColor,
   },
 });

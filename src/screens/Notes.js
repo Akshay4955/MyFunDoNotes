@@ -21,6 +21,7 @@ import {AuthContext} from '../navigation/AuthenticationProvider';
 import NoteCard from '../components/NoteCard';
 import {viewChange} from '../redux/Action';
 import {useDispatch, useSelector} from 'react-redux';
+import PushNotification from 'react-native-push-notification';
 
 const Notes = ({navigation}) => {
   const {user} = useContext(AuthContext);
@@ -134,6 +135,7 @@ const Notes = ({navigation}) => {
                 title={item.title}
                 data={item.data}
                 labels={item.selectedLabels}
+                reminderDate={item.reminderDate}
               />
             </TouchableOpacity>
           )}
@@ -153,6 +155,7 @@ const Notes = ({navigation}) => {
                 title={item.title}
                 data={item.data}
                 labels={item.selectedLabels}
+                reminderDate={item.reminderDate}
               />
             </TouchableOpacity>
           )}

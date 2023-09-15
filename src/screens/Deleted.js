@@ -79,6 +79,7 @@ const Deleted = ({navigation}) => {
               title={item.title}
               data={item.data}
               labels={item.selectedLabels}
+              reminderDate={item.reminderDate}
             />
           </TouchableOpacity>
         )}
