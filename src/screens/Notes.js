@@ -27,7 +27,6 @@ const Notes = ({navigation}) => {
   const {user} = useContext(AuthContext);
   const [userData, setUserData] = useState({});
   const [showModal, setShowModal] = useState(false);
-  const [text, onChangeText] = useState('');
   const [pinnedNotes, setPinnedNotes] = useState([]);
   const [otherNotes, setOtherNotes] = useState([]);
   const styles = GlobalStyleSheet();
@@ -79,18 +78,18 @@ const Notes = ({navigation}) => {
   const handleTogglingOfView = () => {
     dispatch(viewChange());
   };
+  const handleSearchNotes = () => {
+    navigation.navigate('SearchNotes');
+  };
   return (
     <View style={styles.screen_container}>
       <View style={styles.notes_header}>
         <TouchableOpacity onPress={handleMenuPress}>
           <EntypoIcon name="menu" size={25} style={styles.notes_content} />
         </TouchableOpacity>
-        <TextInput
-          style={styles.notes_header_text}
-          onChangeText={onChangeText}
-          placeholder="Search your notes"
-          value={text}
-        />
+        <TouchableOpacity onPress={handleSearchNotes}>
+          <Text style={styles.notes_header_text}>Search your notes</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={handleTogglingOfView}>
           <MaterialIcon
             name="view-agenda-outline"
