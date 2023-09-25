@@ -54,12 +54,7 @@ const Archive = ({navigation}) => {
             onPress={() => {
               handleEditNote(item);
             }}>
-            <NoteCard
-              title={item.title}
-              data={item.data}
-              labels={item.selectedLabels}
-              reminderDate={item.reminderDate}
-            />
+            <NoteCard item={item} />
           </TouchableOpacity>
         )}
       />

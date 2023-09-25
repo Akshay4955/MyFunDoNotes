@@ -5,25 +5,25 @@ import {useSelector} from 'react-redux';
 import {Chip} from 'react-native-paper';
 import MomentTime from './MomentTime';
 
-const NoteCard = ({title, data, labels, reminderDate}) => {
+const NoteCard = ({item}) => {
   const gridVIew = useSelector(state => state.reducer);
 
   let newDate;
   {
-    JSON.stringify(reminderDate) !== '{}' && reminderDate
-      ? (newDate = reminderDate.toDate())
+    JSON.stringify(item.reminderDate) !== '{}' && item.reminderDate
+      ? (newDate = item.reminderDate.toDate())
       : newDate;
   }
   return (
     <View style={gridVIew ? styles.note_container_grid : styles.note_container}>
       <Text style={styles.title} numberOfLines={1}>
-        {title}
+        {item.title}
       </Text>
       <Text style={styles.note} numberOfLines={gridVIew ? 3 : 5}>
-        {data}
+        {item.data}
       </Text>
       <View style={styles.chipContainer}>
-        {labels?.map(item => (
+        {item.labels?.map(item => (
           <Chip key={item.id} children={item.Label} style={styles.chip} />
         ))}
         {newDate ? (

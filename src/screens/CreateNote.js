@@ -13,6 +13,7 @@ import {Chip} from 'react-native-paper';
 import UserModal5 from '../components/UserModal5';
 import MomentTime from '../components/MomentTime';
 import PushNotification from 'react-native-push-notification';
+import {addNoteSQL} from '../services/NoteSQLiteServices';
 
 const CreateNote = ({navigation}) => {
   const route = useRoute();
@@ -61,6 +62,7 @@ const CreateNote = ({navigation}) => {
           labels,
           date,
         );
+        addNoteSQL(text, noteText, archiveData, pinnedData, deleteData);
       }
     }
     navigation.goBack();

@@ -21,7 +21,7 @@ import {AuthContext} from '../navigation/AuthenticationProvider';
 import NoteCard from '../components/NoteCard';
 import {viewChange} from '../redux/Action';
 import {useDispatch, useSelector} from 'react-redux';
-import PushNotification from 'react-native-push-notification';
+import {createTable, fetchNoteSQL} from '../services/NoteSQLiteServices';
 
 const Notes = ({navigation}) => {
   const {user} = useContext(AuthContext);
@@ -58,7 +58,11 @@ const Notes = ({navigation}) => {
     navigation.addListener('focus', () => {
       getNotes();
       getUser();
+      fetchNoteSQL();
     });
+  }, [user]);
+  useEffect(() => {
+    createTable();
   }, [user]);
   const handleMenuPress = () => {
     navigation.openDrawer();
@@ -130,12 +134,7 @@ const Notes = ({navigation}) => {
               onPress={() => {
                 handleEditNote(item);
               }}>
-              <NoteCard
-                title={item.title}
-                data={item.data}
-                labels={item.selectedLabels}
-                reminderDate={item.reminderDate}
-              />
+              <NoteCard item={item} />
             </TouchableOpacity>
           )}
         />
@@ -150,12 +149,7 @@ const Notes = ({navigation}) => {
               onPress={() => {
                 handleEditNote(item);
               }}>
-              <NoteCard
-                title={item.title}
-                data={item.data}
-                labels={item.selectedLabels}
-                reminderDate={item.reminderDate}
-              />
+              <NoteCard item={item} />
             </TouchableOpacity>
           )}
         />

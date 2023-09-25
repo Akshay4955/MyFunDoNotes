@@ -75,12 +75,7 @@ const Deleted = ({navigation}) => {
               handleBackPress={handleOptionBackPress}
               deleteData={deleteNoteId}
             />
-            <NoteCard
-              title={item.title}
-              data={item.data}
-              labels={item.selectedLabels}
-              reminderDate={item.reminderDate}
-            />
+            <NoteCard item={item} />
           </TouchableOpacity>
         )}
       />
