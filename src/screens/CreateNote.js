@@ -13,19 +13,23 @@ import {Chip} from 'react-native-paper';
 import UserModal5 from '../components/UserModal5';
 import MomentTime from '../components/MomentTime';
 import PushNotification from 'react-native-push-notification';
-import {addNoteSQL} from '../services/NoteSQLiteServices';
+import {addNoteSQL, updateNoteSQL} from '../services/NoteSQLiteServices';
+import {useNetInfo} from '@react-native-community/netinfo';
 
 const CreateNote = ({navigation}) => {
   const route = useRoute();
   const editData = route?.params.editData;
   const noteId = route?.params.noteId;
+  const SqlNoteId = route?.params.id;
   const {user} = useContext(AuthContext);
+  const netInfo = useNetInfo();
   const styles = GlobalStyleSheet();
   const [text, setText] = useState(editData.title || '');
   const [noteText, setNoteText] = useState(editData.data || '');
   const [pinnedData, setPinnedData] = useState(editData.pinnedData || false);
   const [archiveData, setArchiveData] = useState(editData.archiveData || false);
   const [deleteData, setDeleteData] = useState(editData.deleteData || false);
+  const [sqlNoteId, setSqlNoteId] = useState(SqlNoteId || 0);
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [date, setDate] = useState(editData?.reminderDate || {});
@@ -49,6 +53,15 @@ const CreateNote = ({navigation}) => {
         labels,
         date,
       );
+      updateNoteSQL(
+        sqlNoteId,
+        text,
+        noteText,
+        archiveData,
+        pinnedData,
+        deleteData,
+        netInfo.isInternetReachable,
+      );
     } else {
       if (text === '' && noteText === '') {
       } else {
@@ -62,7 +75,14 @@ const CreateNote = ({navigation}) => {
           labels,
           date,
         );
-        addNoteSQL(text, noteText, archiveData, pinnedData, deleteData);
+        addNoteSQL(
+          text,
+          noteText,
+          archiveData,
+          pinnedData,
+          deleteData,
+          netInfo.isInternetReachable,
+        );
       }
     }
     navigation.goBack();

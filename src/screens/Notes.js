@@ -26,6 +26,7 @@ import {createTable, fetchNoteSQL} from '../services/NoteSQLiteServices';
 const Notes = ({navigation}) => {
   const {user} = useContext(AuthContext);
   const [userData, setUserData] = useState({});
+  const [sqlData, setSqlData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [pinnedNotes, setPinnedNotes] = useState([]);
   const [otherNotes, setOtherNotes] = useState([]);
@@ -54,11 +55,12 @@ const Notes = ({navigation}) => {
     const userDetails = await fetchUser(user?.uid);
     setUserData(userDetails);
   };
+
   useEffect(() => {
     navigation.addListener('focus', () => {
       getNotes();
       getUser();
-      fetchNoteSQL();
+      fetchNoteSQL().then(data => setSqlData(data));
     });
   }, [user]);
   useEffect(() => {
@@ -77,7 +79,14 @@ const Notes = ({navigation}) => {
     navigation.navigate('CreateNote', {editData: {}, noteId: ''});
   };
   const handleEditNote = item => {
-    navigation.navigate('CreateNote', {editData: item, noteId: item.id});
+    const note = sqlData.filter(
+      note => note.Title === item.title && note.Note === item.data,
+    );
+    navigation.navigate('CreateNote', {
+      editData: item,
+      noteId: item.id,
+      id: note[0].Id,
+    });
   };
   const handleTogglingOfView = () => {
     dispatch(viewChange());
