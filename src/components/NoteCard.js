@@ -7,7 +7,6 @@ import MomentTime from './MomentTime';
 
 const NoteCard = ({item}) => {
   const gridVIew = useSelector(state => state.reducer);
-
   let newDate;
   {
     JSON.stringify(item.reminderDate) !== '{}' && item.reminderDate
@@ -23,7 +22,7 @@ const NoteCard = ({item}) => {
         {item.data}
       </Text>
       <View style={styles.chipContainer}>
-        {item.labels?.map(item => (
+        {item.selectedLabels?.map(item => (
           <Chip key={item.id} children={item.Label} style={styles.chip} />
         ))}
         {newDate ? (
