@@ -1,5 +1,5 @@
 import {View, TextInput, TouchableOpacity, FlatList, Text} from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
@@ -104,6 +104,12 @@ const CreateNote = ({navigation}) => {
   const handleReminderPress = () => {
     setShowModal2(true);
   };
+
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      setLabels(editData.selectedLabels);
+    });
+  }, [user]);
   return (
     <View style={styles.screen_container}>
       <View style={styles.create_note_header}>
