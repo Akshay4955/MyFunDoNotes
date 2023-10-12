@@ -7,10 +7,7 @@ import Archive from '../screens/Archive';
 import Deleted from '../screens/Deleted';
 import HelpAndFeedback from '../screens/HelpAndFeedback';
 import Settings from '../screens/Settings';
-import AntIcon from 'react-native-vector-icons/AntDesign';
-import FoundationIcon from 'react-native-vector-icons/Foundation';
 import * as Constant from '../utilities/Constant';
-import IonIcon from 'react-native-vector-icons/Ionicons';
 import CustomDrawer from '../components/CustomDrawer';
 
 const Drawer = createDrawerNavigator();

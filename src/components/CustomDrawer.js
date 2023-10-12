@@ -13,9 +13,11 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import * as Constant from '../utilities/Constant';
 import {useSelector} from 'react-redux';
 import {FlatList} from 'react-native-gesture-handler';
+import {Language} from '../utilities/Language';
 
 const CustomDrawer = ({navigation}) => {
   receivedLabels = useSelector(data => data.LabelReducer);
+  const language = useSelector(state => state.LanguageReducer);
   return (
     <ScrollView style={styles.container} nestedScrollEnabled={true}>
       <Text style={styles.header}>Fun Do Notes</Text>
@@ -29,7 +31,9 @@ const CustomDrawer = ({navigation}) => {
           size={25}
           color={Constant.Color.inActiveTintColor}
         />
-        <Text style={styles.screen_text}>Notes</Text>
+        <Text style={styles.screen_text}>
+          {language === 'ENGLISH' ? Language[0].english : Language[0].hindi}
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.screen}
@@ -41,7 +45,9 @@ const CustomDrawer = ({navigation}) => {
           size={25}
           color={Constant.Color.inActiveTintColor}
         />
-        <Text style={styles.screen_text}>Reminders</Text>
+        <Text style={styles.screen_text}>
+          {language === 'ENGLISH' ? Language[4].english : Language[4].hindi}
+        </Text>
       </TouchableOpacity>
       {receivedLabels.length === 0 ? (
         <TouchableOpacity
@@ -54,7 +60,9 @@ const CustomDrawer = ({navigation}) => {
             size={25}
             color={Constant.Color.inActiveTintColor}
           />
-          <Text style={styles.screen_text}>Create New Label</Text>
+          <Text style={styles.screen_text}>
+            {language === 'ENGLISH' ? Language[5].english : Language[5].hindi}
+          </Text>
         </TouchableOpacity>
       ) : (
         <View style={styles.create_label_container}>
@@ -77,7 +85,9 @@ const CustomDrawer = ({navigation}) => {
               size={25}
               color={Constant.Color.inActiveTintColor}
             />
-            <Text style={styles.screen_text}>Create New Label</Text>
+            <Text style={styles.screen_text}>
+              {language === 'ENGLISH' ? Language[5].english : Language[5].hindi}
+            </Text>
           </TouchableOpacity>
         </View>
       )}
@@ -92,7 +102,9 @@ const CustomDrawer = ({navigation}) => {
           size={25}
           color={Constant.Color.inActiveTintColor}
         />
-        <Text style={styles.screen_text}>Archive</Text>
+        <Text style={styles.screen_text}>
+          {language === 'ENGLISH' ? Language[6].english : Language[6].hindi}
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.screen}
@@ -104,7 +116,9 @@ const CustomDrawer = ({navigation}) => {
           size={25}
           color={Constant.Color.inActiveTintColor}
         />
-        <Text style={styles.screen_text}>Deleted</Text>
+        <Text style={styles.screen_text}>
+          {language === 'ENGLISH' ? Language[7].english : Language[7].hindi}
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.screen}
@@ -116,7 +130,9 @@ const CustomDrawer = ({navigation}) => {
           size={25}
           color={Constant.Color.inActiveTintColor}
         />
-        <Text style={styles.screen_text}>Settings</Text>
+        <Text style={styles.screen_text}>
+          {language === 'ENGLISH' ? Language[8].english : Language[8].hindi}
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.screen}
@@ -128,7 +144,9 @@ const CustomDrawer = ({navigation}) => {
           size={25}
           color={Constant.Color.inActiveTintColor}
         />
-        <Text style={styles.screen_text}>Help & Feedback</Text>
+        <Text style={styles.screen_text}>
+          {language === 'ENGLISH' ? Language[9].english : Language[9].hindi}
+        </Text>
       </TouchableOpacity>
     </ScrollView>
   );

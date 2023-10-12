@@ -4,6 +4,9 @@ import * as Constant from '../utilities/Constant';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import {Language} from '../utilities/Language';
+import {useSelector} from 'react-redux';
+
 const UserModal3 = ({
   modalVisibility,
   handleBackPress,
@@ -13,6 +16,7 @@ const UserModal3 = ({
   editData,
   noteId,
 }) => {
+  const language = useSelector(state => state.LanguageReducer);
   return (
     <Modal
       animationType="slide"
@@ -36,19 +40,35 @@ const UserModal3 = ({
                   : Constant.Color.inActiveTintColor
               }
             />
-            <Text style={styles.modalText}>Delete</Text>
+            <Text style={styles.modalText}>
+              {language === 'ENGLISH'
+                ? Language[14].english
+                : Language[14].hindi}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.content}>
             <AntIcon name="copy1" size={25} />
-            <Text style={styles.modalText}>Make a copy</Text>
+            <Text style={styles.modalText}>
+              {language === 'ENGLISH'
+                ? Language[15].english
+                : Language[15].hindi}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.content}>
             <AntIcon name="sharealt" size={25} />
-            <Text style={styles.modalText}>Send</Text>
+            <Text style={styles.modalText}>
+              {language === 'ENGLISH'
+                ? Language[16].english
+                : Language[16].hindi}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.content}>
             <AntIcon name="adduser" size={25} />
-            <Text style={styles.modalText}>Collaborator</Text>
+            <Text style={styles.modalText}>
+              {language === 'ENGLISH'
+                ? Language[17].english
+                : Language[17].hindi}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.content}
@@ -56,11 +76,17 @@ const UserModal3 = ({
               navigation.navigate('LabelSelect', {editData, noteId});
             }}>
             <MaterialIcon name="label-outline" size={25} />
-            <Text style={styles.modalText}>Labels</Text>
+            <Text style={styles.modalText}>
+              {language === 'ENGLISH'
+                ? Language[18].english
+                : Language[18].hindi}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.content}>
             <IonIcon name="help-circle" size={25} />
-            <Text style={styles.modalText}>Help & feedback</Text>
+            <Text style={styles.modalText}>
+              {language === 'ENGLISH' ? Language[9].english : Language[9].hindi}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

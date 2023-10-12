@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -22,6 +15,7 @@ import NoteCard from '../components/NoteCard';
 import {viewChange} from '../redux/Action';
 import {useDispatch, useSelector} from 'react-redux';
 import {createTable, fetchNoteSQL} from '../services/NoteSQLiteServices';
+import {Language} from '../utilities/Language';
 
 const Notes = ({navigation}) => {
   const {user} = useContext(AuthContext);
@@ -33,6 +27,7 @@ const Notes = ({navigation}) => {
   const styles = GlobalStyleSheet();
   const dispatch = useDispatch();
   const gridView = useSelector(state => state.reducer);
+  const language = useSelector(state => state.LanguageReducer);
 
   const getNotes = async () => {
     const fetchedNotes = await fetchNotes(user?.uid);
@@ -101,7 +96,9 @@ const Notes = ({navigation}) => {
           <EntypoIcon name="menu" size={25} style={styles.notes_content} />
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSearchNotes}>
-          <Text style={styles.notes_header_text}>Search your notes</Text>
+          <Text style={styles.notes_header_text}>
+            {language === 'ENGLISH' ? Language[3].english : Language[3].hindi}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleTogglingOfView}>
           <MaterialIcon
@@ -133,7 +130,9 @@ const Notes = ({navigation}) => {
         handleProfileBackPress={handleProfileBackPress}
       />
       <View style={styles.notes_container}>
-        <Text style={styles.note_type}>Pinned</Text>
+        <Text style={styles.note_type}>
+          {language === 'ENGLISH' ? Language[2].english : Language[2].hindi}
+        </Text>
         <FlatList
           data={pinnedNotes}
           numColumns={gridView ? 2 : 1}
@@ -148,7 +147,9 @@ const Notes = ({navigation}) => {
           )}
         />
 
-        <Text style={styles.note_type}>Other</Text>
+        <Text style={styles.note_type}>
+          {language === 'ENGLISH' ? Language[1].english : Language[1].hindi}
+        </Text>
         <FlatList
           data={otherNotes}
           numColumns={gridView ? 2 : 1}

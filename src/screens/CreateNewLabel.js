@@ -15,6 +15,7 @@ import {AuthContext} from '../navigation/AuthenticationProvider';
 import LabelCard from '../components/LabelCard';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchingLabels} from '../redux/Action';
+import {Language} from '../utilities/Language';
 
 const CreateNewLabel = ({navigation}) => {
   const {user} = useContext(AuthContext);
@@ -25,6 +26,7 @@ const CreateNewLabel = ({navigation}) => {
   const dispatch = useDispatch();
   const styles = GlobalStyleSheet();
   receivedLabels = useSelector(data => data.LabelReducer);
+  const language = useSelector(state => state.LanguageReducer);
   const getLabels = async () => {
     const fetchedLabels = await fetchLabels(user?.uid);
     dispatch(fetchingLabels(fetchedLabels));
@@ -57,7 +59,9 @@ const CreateNewLabel = ({navigation}) => {
         <TouchableOpacity onPress={handleBackPress}>
           <AntIcon name="arrowleft" size={25} style={styles.notes_content} />
         </TouchableOpacity>
-        <Text style={styles.note_type}>Edit labels</Text>
+        <Text style={styles.note_type}>
+          {language === 'ENGLISH' ? Language[10].english : Language[10].hindi}
+        </Text>
       </View>
       <View style={styles.create_note_header}>
         {closeIcon ? (
@@ -77,7 +81,9 @@ const CreateNewLabel = ({navigation}) => {
           }}
           style={styles.notes_header_text}
           onChangeText={onChangeText}
-          placeholder="Create new label"
+          placeholder={
+            language === 'ENGLISH' ? Language[5].english : Language[5].hindi
+          }
           value={text}
         />
         {closeIcon ? (

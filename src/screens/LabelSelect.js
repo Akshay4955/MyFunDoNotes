@@ -1,13 +1,15 @@
 import {View, TextInput, TouchableOpacity, FlatList, Text} from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import GlobalStyleSheet from '../utilities/GlobalStyleSheet';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import CheckBox from '@react-native-community/checkbox';
 import {useSelector} from 'react-redux';
+import {Language} from '../utilities/Language';
 
 const LabelSelect = ({navigation, route}) => {
   const {editData, noteId} = route.params;
+  const language = useSelector(state => state.LanguageReducer);
   const styles = GlobalStyleSheet();
   const [text, onChangeText] = useState('');
   const [selectedLabels, setSelectedLabels] = useState(
@@ -43,7 +45,9 @@ const LabelSelect = ({navigation, route}) => {
         <TextInput
           style={styles.notes_header_text}
           onChangeText={onChangeText}
-          placeholder="Enter label name"
+          placeholder={
+            language === 'ENGLISH' ? Language[19].english : Language[19].hindi
+          }
           value={text}
         />
       </View>

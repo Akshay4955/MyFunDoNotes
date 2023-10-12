@@ -1,4 +1,4 @@
-import {View, TextInput, TouchableOpacity, FlatList, Text} from 'react-native';
+import {View, TextInput, TouchableOpacity} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
@@ -34,8 +34,6 @@ const CreateNote = ({navigation}) => {
   const [showModal2, setShowModal2] = useState(false);
   const [date, setDate] = useState(editData?.reminderDate || {});
   const [labels, setLabels] = useState(editData.selectedLabels || []);
-  console.log('Labels selected in edit data', editData.selectedLabels);
-  console.log('Labels selected ', labels);
   let newDate;
   {
     date === editData?.reminderDate && JSON.stringify(date) !== '{}'

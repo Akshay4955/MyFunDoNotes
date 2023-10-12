@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  RefreshControl,
-} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import GlobalStyleSheet from '../utilities/GlobalStyleSheet';
 import {AuthContext} from '../navigation/AuthenticationProvider';
@@ -14,6 +8,7 @@ import EntypoIcon from 'react-native-vector-icons/Entypo';
 import * as Constant from '../utilities/Constant';
 import UserModal4 from '../components/UserModal4';
 import {useSelector} from 'react-redux';
+import {Language} from '../utilities/Language';
 
 const Deleted = ({navigation}) => {
   const {user} = useContext(AuthContext);
@@ -22,6 +17,7 @@ const Deleted = ({navigation}) => {
   const [deleteNoteId, setDeleteNoteId] = useState('');
   const styles = GlobalStyleSheet();
   const gridView = useSelector(state => state.reducer);
+  const language = useSelector(state => state.LanguageReducer);
   const getNotes = async () => {
     const fetchedNotes = await fetchNotes(user?.uid);
     const fetchedDeletedNotes = fetchedNotes?.filter(
@@ -53,7 +49,9 @@ const Deleted = ({navigation}) => {
         <TouchableOpacity onPress={handleMenuPress}>
           <EntypoIcon name="menu" size={25} style={styles.notes_content} />
         </TouchableOpacity>
-        <Text style={styles.note_type}>Deleted</Text>
+        <Text style={styles.note_type}>
+          {language === 'ENGLISH' ? Language[7].english : Language[7].hindi}
+        </Text>
         <TouchableOpacity style={{marginLeft: Constant.margin.headerMargin}}>
           <EntypoIcon name="dots-three-vertical" size={25} />
         </TouchableOpacity>

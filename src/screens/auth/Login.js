@@ -3,15 +3,17 @@ import React, {useContext, useEffect, useState} from 'react';
 import UserInput from '../../components/UserInput';
 import GlobalStyleSheet from '../../utilities/GlobalStyleSheet';
 import UserButton from '../../components/UserButton';
-import * as Constant from '../../utilities/Constant';
 import {AuthContext} from '../../navigation/AuthenticationProvider';
 import {
   GoogleSignin,
   GoogleSigninButton,
 } from '@react-native-google-signin/google-signin';
+import {Language} from '../../utilities/Language';
+import {useSelector} from 'react-redux';
 
 const Login = () => {
   const styles = GlobalStyleSheet();
+  const language = useSelector(state => state.LanguageReducer);
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -48,21 +50,32 @@ const Login = () => {
   }, []);
   return (
     <View style={styles.screen_container}>
-      <Text style={styles.auth_screen_header}>Welcome</Text>
+      <Text style={styles.auth_screen_header}>
+        {language === 'ENGLISH' ? Language[24].english : Language[24].hindi}
+      </Text>
       <UserInput
-        placeholder="Enter UserName"
+        placeholder={
+          language === 'ENGLISH' ? Language[22].english : Language[22].hindi
+        }
         value={userName}
         setText={setUserName}
       />
       <Text style={styles.auth_screen_error}>{emailError}</Text>
       <UserInput
-        placeholder="Enter Password"
+        placeholder={
+          language === 'ENGLISH' ? Language[23].english : Language[23].hindi
+        }
         value={password}
         setText={setPassword}
         secured={true}
       />
       <Text style={styles.auth_screen_error}>{passwordError}</Text>
-      <UserButton name="Login" handleOnPress={handleLoginPress} />
+      <UserButton
+        name={
+          language === 'ENGLISH' ? Language[24].english : Language[24].hindi
+        }
+        handleOnPress={handleLoginPress}
+      />
       <GoogleSigninButton
         style={styles.auth_screen_button}
         onPress={handleGoogleSignIn}></GoogleSigninButton>

@@ -12,7 +12,6 @@ import * as Constant from '../utilities/Constant';
 import {fetchUser, updateUser} from '../services/UserServices';
 import {AuthContext} from '../navigation/AuthenticationProvider';
 import ImagePicker from 'react-native-image-crop-picker';
-import ModalButton from './ModalButton';
 import storage from '@react-native-firebase/storage';
 import UserModal2 from './UserModal2';
 

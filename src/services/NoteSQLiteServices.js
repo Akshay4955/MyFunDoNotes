@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import SQLite from 'react-native-sqlite-storage';
 
 const tableName = 'Notes';
@@ -9,10 +8,10 @@ export const createTable = () => {
     txn.executeSql(
       `CREATE TABLE IF NOT EXISTS ${tableName} (Id INTEGER PRIMARY KEY AUTOINCREMENT, Title TEXT, Note TEXT, ArchiveData INTEGER, PinnedData INTEGER, DeleteData INTEGER, NetInfo INTEGER);`,
       [],
-      (tx, results) => {
+      () => {
         console.log('Table created successfully');
       },
-      error => {
+      () => {
         console.log('Error while creating table');
       },
     );

@@ -1,11 +1,12 @@
 import {View, Text} from 'react-native';
 import React, {useContext, useState} from 'react';
 import GlobalStyleSheet from '../../utilities/GlobalStyleSheet';
-import * as Constant from '../../utilities/Constant';
 import UserInput from '../../components/UserInput';
 import UserButton from '../../components/UserButton';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {AuthContext} from '../../navigation/AuthenticationProvider';
+import {useSelector} from 'react-redux';
+import {Language} from '../../utilities/Language';
 
 const SignUp = ({navigation}) => {
   const styles = GlobalStyleSheet();
@@ -18,6 +19,7 @@ const SignUp = ({navigation}) => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const {signUp} = useContext(AuthContext);
+  const language = useSelector(state => state.LanguageReducer);
 
   const validateInput = () => {
     const NAME_PATTERN = /^[A-Z][a-z]{2,}$/;
@@ -56,32 +58,51 @@ const SignUp = ({navigation}) => {
   };
   return (
     <View style={styles.screen_container}>
-      <Text style={styles.auth_screen_header}>SignUp</Text>
-      <UserInput placeholder="Enter Name" value={name} setText={setName} />
+      <Text style={styles.auth_screen_header}>
+        {language === 'ENGLISH' ? Language[12].english : Language[12].hindi}
+      </Text>
+      <UserInput
+        placeholder={
+          language === 'ENGLISH' ? Language[20].english : Language[20].hindi
+        }
+        value={name}
+        setText={setName}
+      />
       <Text style={styles.auth_screen_error}>{nameError}</Text>
       <UserInput
-        placeholder="Enter Mobile No"
+        placeholder={
+          language === 'ENGLISH' ? Language[21].english : Language[21].hindi
+        }
         value={mobileNo}
         setText={setMobileNo}
       />
       <Text style={styles.auth_screen_error}>{mobileNoError}</Text>
       <UserInput
-        placeholder="Enter UserName"
+        placeholder={
+          language === 'ENGLISH' ? Language[22].english : Language[22].hindi
+        }
         value={userName}
         setText={setUserName}
       />
       <Text style={styles.auth_screen_error}>{emailError}</Text>
       <UserInput
-        placeholder="Enter Password"
+        placeholder={
+          language === 'ENGLISH' ? Language[23].english : Language[23].hindi
+        }
         value={password}
         setText={setPassword}
         secured={true}
       />
       <Text style={styles.auth_screen_error}>{passwordError}</Text>
-      <UserButton name="SignUp" handleOnPress={handleSignUpPress} />
+      <UserButton
+        name={
+          language === 'ENGLISH' ? Language[12].english : Language[12].hindi
+        }
+        handleOnPress={handleSignUpPress}
+      />
       <TouchableOpacity onPress={handleHaveAccountPress}>
         <Text style={styles.auth_screen_button}>
-          Have an account? Login here.
+          {language === 'ENGLISH' ? Language[13].english : Language[13].hindi}
         </Text>
       </TouchableOpacity>
     </View>

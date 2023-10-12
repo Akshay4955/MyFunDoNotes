@@ -1,10 +1,4 @@
-import {
-  FlatList,
-  View,
-  Text,
-  TouchableOpacity,
-  RefreshControl,
-} from 'react-native';
+import {FlatList, View, Text, TouchableOpacity} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import GlobalStyleSheet from '../utilities/GlobalStyleSheet';
 import {AuthContext} from '../navigation/AuthenticationProvider';
@@ -12,13 +6,14 @@ import {fetchNotes} from '../services/NotesServices';
 import NoteCard from '../components/NoteCard';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import {useSelector} from 'react-redux';
+import {Language} from '../utilities/Language';
 
 const Archive = ({navigation}) => {
   const {user} = useContext(AuthContext);
   const [archivedNotes, setArchivedNotes] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
   const styles = GlobalStyleSheet();
   const gridView = useSelector(state => state.reducer);
+  const language = useSelector(state => state.LanguageReducer);
   const getNotes = async () => {
     const fetchedNotes = await fetchNotes(user?.uid);
     const fetchedArchivedNotes = fetchedNotes?.filter(
@@ -43,7 +38,9 @@ const Archive = ({navigation}) => {
         <TouchableOpacity onPress={handleMenuPress}>
           <EntypoIcon name="menu" size={25} style={styles.notes_content} />
         </TouchableOpacity>
-        <Text style={styles.note_type}>Archived</Text>
+        <Text style={styles.note_type}>
+          {language === 'English' ? Language[11].english : Language[11].hindi}
+        </Text>
       </View>
       <FlatList
         numColumns={gridView ? 2 : 1}
