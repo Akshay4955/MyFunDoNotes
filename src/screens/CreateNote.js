@@ -15,10 +15,12 @@ import MomentTime from '../components/MomentTime';
 import PushNotification from 'react-native-push-notification';
 import {addNoteSQL, updateNoteSQL} from '../services/NoteSQLiteServices';
 import {useNetInfo} from '@react-native-community/netinfo';
+import {useSelector} from 'react-redux';
 
 const CreateNote = ({navigation}) => {
   const route = useRoute();
   const editData = route?.params.editData;
+  const theme = useSelector(state => state.LanguageReducer);
   const noteId = route?.params.noteId;
   const SqlNoteId = route?.params.id;
   const {user} = useContext(AuthContext);
@@ -151,6 +153,11 @@ const CreateNote = ({navigation}) => {
           style={styles.createNote_title_text}
           onChangeText={setText}
           placeholder="Title"
+          placeholderTextColor={
+            theme == 'DARK'
+              ? Constant.Color.whiteColor
+              : Constant.Color.backgroundColor
+          }
           value={text}></TextInput>
       </View>
       <View>
@@ -159,6 +166,11 @@ const CreateNote = ({navigation}) => {
           multiline
           onChangeText={setNoteText}
           placeholder="Note"
+          placeholderTextColor={
+            theme == 'DARK'
+              ? Constant.Color.whiteColor
+              : Constant.Color.backgroundColor
+          }
           value={noteText}></TextInput>
       </View>
       <View style={styles.chipContainer}>

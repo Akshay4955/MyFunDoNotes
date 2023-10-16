@@ -52,9 +52,6 @@ const Deleted = ({navigation}) => {
         <Text style={styles.note_type}>
           {language === 'ENGLISH' ? Language[7].english : Language[7].hindi}
         </Text>
-        <TouchableOpacity style={{marginLeft: Constant.margin.headerMargin}}>
-          <EntypoIcon name="dots-three-vertical" size={25} />
-        </TouchableOpacity>
       </View>
       <FlatList
         numColumns={gridView ? 2 : 1}

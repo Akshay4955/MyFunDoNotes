@@ -6,10 +6,12 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import CheckBox from '@react-native-community/checkbox';
 import {useSelector} from 'react-redux';
 import {Language} from '../utilities/Language';
+import * as Constant from '../utilities/Constant';
 
 const LabelSelect = ({navigation, route}) => {
   const {editData, noteId} = route.params;
   const language = useSelector(state => state.LanguageReducer);
+  const theme = useSelector(state => state.ThemeReducer);
   const styles = GlobalStyleSheet();
   const [text, onChangeText] = useState('');
   const [selectedLabels, setSelectedLabels] = useState(
@@ -48,6 +50,11 @@ const LabelSelect = ({navigation, route}) => {
           placeholder={
             language === 'ENGLISH' ? Language[19].english : Language[19].hindi
           }
+          placeholderTextColor={
+            theme == 'DARK'
+              ? Constant.Color.whiteColor
+              : Constant.Color.backgroundColor
+          }
           value={text}
         />
       </View>
@@ -55,7 +62,11 @@ const LabelSelect = ({navigation, route}) => {
         data={receivedLabels}
         renderItem={({item}) => (
           <View style={styles.create_note_header}>
-            <MaterialIcon name="label-outline" size={25} />
+            <MaterialIcon
+              name="label-outline"
+              size={25}
+              style={styles.notes_content}
+            />
             <Text style={styles.label_text}>{item.Label}</Text>
             <CheckBox
               value={selectedLabels.some(value => {
@@ -64,6 +75,12 @@ const LabelSelect = ({navigation, route}) => {
               onValueChange={() => {
                 toggleCheckBox(item);
               }}
+              boxType="square"
+              tintColor={
+                theme == 'DARK'
+                  ? Constant.Color.whiteColor
+                  : Constant.Color.backgroundColor
+              }
             />
           </View>
         )}

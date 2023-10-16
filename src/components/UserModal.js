@@ -14,9 +14,11 @@ import {AuthContext} from '../navigation/AuthenticationProvider';
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import UserModal2 from './UserModal2';
+import {useSelector} from 'react-redux';
 
 const UserModal = ({modalVisibility, handleProfileBackPress}) => {
   const {user, logOut} = useContext(AuthContext);
+  const theme = useSelector(state => state.ThemeReducer);
   const [showModal, setShowModal] = useState(false);
   const [userData, setUserData] = useState({});
   const getUser = async () => {
@@ -62,6 +64,43 @@ const UserModal = ({modalVisibility, handleProfileBackPress}) => {
       console.log(error);
     }
   };
+
+  const styles = StyleSheet.create({
+    container: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginHorizontal: Constant.margin.medium,
+      marginVertical: Constant.margin.modalMargin,
+      height: Constant.height.modalHeight,
+      width: Constant.width.extralarge,
+      backgroundColor: Constant.Color.backgroundColor,
+      borderColor: Constant.Color.lightColor,
+      borderLeftWidth: Constant.borderWidth.large,
+      borderRightWidth: Constant.borderWidth.large,
+      borderTopWidth: Constant.borderWidth.extralarge,
+      borderBottomWidth: Constant.borderWidth.extralarge,
+      borderRadius: Constant.borderRadius.large,
+      backgroundColor:
+        theme === 'DARK'
+          ? Constant.Color.backgroundColor
+          : Constant.Color.whiteColor,
+    },
+    profile_pic: {
+      height: Constant.height.profilePic,
+      width: Constant.width.small,
+      marginLeft: Constant.margin.medium,
+      borderRadius: Constant.borderRadius.extralarge,
+    },
+    text: {
+      padding: Constant.padding.medium,
+      fontSize: Constant.fontSize.small,
+      fontWeight: '300',
+      color:
+        theme === 'DARK'
+          ? Constant.Color.whiteColor
+          : Constant.Color.backgroundColor,
+    },
+  });
   return (
     <View>
       <Modal
@@ -104,34 +143,5 @@ const UserModal = ({modalVisibility, handleProfileBackPress}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: Constant.margin.medium,
-    marginVertical: Constant.margin.modalMargin,
-    height: Constant.height.modalHeight,
-    width: Constant.width.extralarge,
-    backgroundColor: Constant.Color.backgroundColor,
-    borderColor: Constant.Color.lightColor,
-    borderLeftWidth: Constant.borderWidth.large,
-    borderRightWidth: Constant.borderWidth.large,
-    borderTopWidth: Constant.borderWidth.extralarge,
-    borderBottomWidth: Constant.borderWidth.extralarge,
-    borderRadius: Constant.borderRadius.large,
-  },
-  profile_pic: {
-    height: Constant.height.profilePic,
-    width: Constant.width.small,
-    marginLeft: Constant.margin.medium,
-    borderRadius: Constant.borderRadius.extralarge,
-  },
-  text: {
-    padding: Constant.padding.medium,
-    fontSize: Constant.fontSize.small,
-    fontWeight: '300',
-  },
-});
 
 export default UserModal;

@@ -8,6 +8,7 @@ import {Language} from '../utilities/Language';
 
 const Reminders = ({navigation}) => {
   const language = useSelector(state => state.LanguageReducer);
+  const theme = useSelector(state => state.ThemeReducer);
   const styles = GlobalStyleSheet();
   const handleMenuPress = () => {
     navigation.openDrawer();
@@ -21,11 +22,15 @@ const Reminders = ({navigation}) => {
         <Text style={styles.note_type}>
           {language === 'ENGLISH' ? Language[4].english : Language[4].hindi}
         </Text>
-        <TouchableOpacity style={{marginLeft: Constant.margin.headerMargin}}>
-          <EntypoIcon name="dots-three-vertical" size={25} />
-        </TouchableOpacity>
       </View>
-      <Text style={{flex: 1}}>
+      <Text
+        style={{
+          flex: 1,
+          color:
+            theme == 'DARK'
+              ? Constant.Color.whiteColor
+              : Constant.Color.backgroundColor,
+        }}>
         {language === 'ENGLISH' ? Language[4].english : Language[4].hindi}
       </Text>
     </View>

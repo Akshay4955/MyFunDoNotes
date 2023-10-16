@@ -7,12 +7,58 @@ import MomentTime from './MomentTime';
 
 const NoteCard = ({item}) => {
   const gridVIew = useSelector(state => state.reducer);
+  const theme = useSelector(state => state.ThemeReducer);
   let newDate;
   {
     JSON.stringify(item.reminderDate) !== '{}' && item.reminderDate
       ? (newDate = item.reminderDate.toDate())
       : newDate;
   }
+
+  const styles = StyleSheet.create({
+    note_container: {
+      height: Constant.height.noteHeight,
+      width: Constant.width.extralarge,
+      paddingLeft: Constant.padding.medium,
+      borderColor: Constant.Color.lightColor,
+      borderWidth: Constant.borderWidth.medium,
+      borderRadius: Constant.borderRadius.large,
+      margin: Constant.margin.small,
+    },
+    note_container_grid: {
+      height: Constant.height.noteHeight,
+      width: Constant.width.medium,
+      paddingLeft: Constant.padding.medium,
+      borderColor: Constant.Color.lightColor,
+      borderWidth: Constant.borderWidth.medium,
+      borderRadius: Constant.borderRadius.large,
+      margin: Constant.margin.small,
+    },
+    title: {
+      fontSize: Constant.fontSize.small,
+      color:
+        theme == 'DARK'
+          ? Constant.Color.whiteColor
+          : Constant.Color.backgroundColor,
+    },
+    note: {
+      fontSize: Constant.fontSize.verySmall,
+      padding: Constant.padding.small,
+      color:
+        theme == 'DARK'
+          ? Constant.Color.whiteColor
+          : Constant.Color.backgroundColor,
+    },
+    chipContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    },
+    chip: {
+      marginVertical: 2,
+      marginRight: 2,
+      backgroundColor: Constant.Color.activeTintColor,
+    },
+  });
   return (
     <View style={gridVIew ? styles.note_container_grid : styles.note_container}>
       <Text style={styles.title} numberOfLines={1}>
@@ -34,42 +80,4 @@ const NoteCard = ({item}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  note_container: {
-    height: Constant.height.noteHeight,
-    width: Constant.width.extralarge,
-    paddingLeft: Constant.padding.medium,
-    borderColor: Constant.Color.lightColor,
-    borderWidth: Constant.borderWidth.medium,
-    borderRadius: Constant.borderRadius.large,
-    margin: Constant.margin.small,
-  },
-  note_container_grid: {
-    height: Constant.height.noteHeight,
-    width: Constant.width.medium,
-    paddingLeft: Constant.padding.medium,
-    borderColor: Constant.Color.lightColor,
-    borderWidth: Constant.borderWidth.medium,
-    borderRadius: Constant.borderRadius.large,
-    margin: Constant.margin.small,
-  },
-  title: {
-    fontSize: Constant.fontSize.small,
-  },
-  note: {
-    fontSize: Constant.fontSize.verySmall,
-    padding: Constant.padding.small,
-  },
-  chipContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  chip: {
-    marginVertical: 2,
-    marginRight: 2,
-    backgroundColor: Constant.Color.activeTintColor,
-  },
-});
-
 export default NoteCard;

@@ -12,11 +12,12 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import {updateLabel, deleteLabel, fetchLabels} from '../services/LabelServices';
 import {AuthContext} from '../navigation/AuthenticationProvider';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {fetchingLabels} from '../redux/Action';
 
 const LabelCard = ({title, id, isSelected, onSelect}) => {
   const {user} = useContext(AuthContext);
+  const theme = useSelector(state => state.ThemeReducer);
   const textInputRef = useRef(true);
   const [text, setText] = useState(title);
   const dispatch = useDispatch();
@@ -38,14 +39,56 @@ const LabelCard = ({title, id, isSelected, onSelect}) => {
   const handleEditPress = () => {
     textInputRef.current.focus();
   };
+
+  const styles = StyleSheet.create({
+    label: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      alignContent: 'center',
+      justifyContent: 'flex-start',
+      marginHorizontal: Constant.margin.verySmall,
+      marginVertical: Constant.margin.verySmall,
+      padding: Constant.padding.small,
+      height: Constant.height.small,
+      width: Constant.width.extralarge,
+    },
+    name: {
+      marginLeft: Constant.margin.small,
+      width: Constant.width.label,
+      color:
+        theme === 'DARK'
+          ? Constant.Color.whiteColor
+          : Constant.Color.backgroundColor,
+    },
+    editIcon: {
+      marginLeft: Constant.margin.small,
+    },
+  });
   return (
     <View style={styles.label}>
       {isSelected ? (
         <TouchableOpacity onPress={handleDeletePress}>
-          <AntIcon name="delete" size={25} />
+          <AntIcon
+            name="delete"
+            size={25}
+            color={
+              theme === 'DARK'
+                ? Constant.Color.whiteColor
+                : Constant.Color.backgroundColor
+            }
+          />
         </TouchableOpacity>
       ) : (
-        <MaterialIcon name="label-outline" size={25} />
+        <MaterialIcon
+          name="label-outline"
+          size={25}
+          color={
+            theme === 'DARK'
+              ? Constant.Color.whiteColor
+              : Constant.Color.backgroundColor
+          }
+        />
       )}
       <TouchableOpacity onPress={handleOnFocus}>
         <TextInput
@@ -58,11 +101,29 @@ const LabelCard = ({title, id, isSelected, onSelect}) => {
 
       {isSelected ? (
         <TouchableOpacity onPress={handleUpdatePress}>
-          <AntIcon name="check" size={25} style={styles.editIcon} />
+          <AntIcon
+            name="check"
+            size={25}
+            style={styles.editIcon}
+            color={
+              theme === 'DARK'
+                ? Constant.Color.whiteColor
+                : Constant.Color.backgroundColor
+            }
+          />
         </TouchableOpacity>
       ) : (
         <TouchableOpacity onPress={handleEditPress}>
-          <FontAwesomeIcon name="pencil" size={25} style={styles.editIcon} />
+          <FontAwesomeIcon
+            name="pencil"
+            size={25}
+            style={styles.editIcon}
+            color={
+              theme === 'DARK'
+                ? Constant.Color.whiteColor
+                : Constant.Color.backgroundColor
+            }
+          />
         </TouchableOpacity>
       )}
     </View>
@@ -70,25 +131,3 @@ const LabelCard = ({title, id, isSelected, onSelect}) => {
 };
 
 export default LabelCard;
-
-const styles = StyleSheet.create({
-  label: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'flex-start',
-    marginHorizontal: Constant.margin.verySmall,
-    marginVertical: Constant.margin.verySmall,
-    padding: Constant.padding.small,
-    height: Constant.height.small,
-    width: Constant.width.extralarge,
-  },
-  name: {
-    marginLeft: Constant.margin.small,
-    width: Constant.width.label,
-  },
-  editIcon: {
-    marginLeft: Constant.margin.small,
-  },
-});

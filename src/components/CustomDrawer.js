@@ -16,8 +16,50 @@ import {FlatList} from 'react-native-gesture-handler';
 import {Language} from '../utilities/Language';
 
 const CustomDrawer = ({navigation}) => {
-  receivedLabels = useSelector(data => data.LabelReducer);
+  const receivedLabels = useSelector(data => data.LabelReducer);
   const language = useSelector(state => state.LanguageReducer);
+  const theme = useSelector(state => state.ThemeReducer);
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor:
+        theme === 'DARK'
+          ? Constant.Color.backgroundColor
+          : Constant.Color.whiteColor,
+    },
+    header: {
+      marginLeft: Constant.margin.large,
+      marginTop: Constant.margin.large,
+      fontSize: Constant.fontSize.medium,
+      color:
+        theme === 'DARK'
+          ? Constant.Color.whiteColor
+          : Constant.Color.backgroundColor,
+    },
+    screen: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginTop: Constant.margin.medium,
+      marginLeft: Constant.margin.medium,
+      padding: Constant.padding.small,
+      height: Constant.height.small,
+      borderRadius: Constant.borderRadius.large,
+    },
+    screen_text: {
+      marginLeft: Constant.margin.medium,
+      fontSize: Constant.fontSize.small,
+      color:
+        theme === 'DARK'
+          ? Constant.Color.whiteColor
+          : Constant.Color.backgroundColor,
+    },
+    create_label_container: {
+      borderColor: Constant.Color.activeTintColor,
+      borderTopWidth: Constant.borderWidth.small,
+      borderBottomWidth: Constant.borderWidth.small,
+    },
+  });
   return (
     <ScrollView style={styles.container} nestedScrollEnabled={true}>
       <Text style={styles.header}>Fun Do Notes</Text>
@@ -29,7 +71,11 @@ const CustomDrawer = ({navigation}) => {
         <AntIcon
           name="bulb1"
           size={25}
-          color={Constant.Color.inActiveTintColor}
+          color={
+            theme === 'DARK'
+              ? Constant.Color.whiteColor
+              : Constant.Color.backgroundColor
+          }
         />
         <Text style={styles.screen_text}>
           {language === 'ENGLISH' ? Language[0].english : Language[0].hindi}
@@ -43,7 +89,11 @@ const CustomDrawer = ({navigation}) => {
         <AntIcon
           name="bells"
           size={25}
-          color={Constant.Color.inActiveTintColor}
+          color={
+            theme === 'DARK'
+              ? Constant.Color.whiteColor
+              : Constant.Color.backgroundColor
+          }
         />
         <Text style={styles.screen_text}>
           {language === 'ENGLISH' ? Language[4].english : Language[4].hindi}
@@ -58,7 +108,11 @@ const CustomDrawer = ({navigation}) => {
           <AntIcon
             name="plus"
             size={25}
-            color={Constant.Color.inActiveTintColor}
+            color={
+              theme === 'DARK'
+                ? Constant.Color.whiteColor
+                : Constant.Color.backgroundColor
+            }
           />
           <Text style={styles.screen_text}>
             {language === 'ENGLISH' ? Language[5].english : Language[5].hindi}
@@ -70,7 +124,15 @@ const CustomDrawer = ({navigation}) => {
             data={receivedLabels}
             renderItem={({item}) => (
               <View style={styles.screen}>
-                <MaterialIcon name="label-outline" size={25} />
+                <MaterialIcon
+                  name="label-outline"
+                  size={25}
+                  color={
+                    theme === 'DARK'
+                      ? Constant.Color.whiteColor
+                      : Constant.Color.backgroundColor
+                  }
+                />
                 <Text style={styles.screen_text}>{item.Label}</Text>
               </View>
             )}
@@ -83,7 +145,11 @@ const CustomDrawer = ({navigation}) => {
             <AntIcon
               name="plus"
               size={25}
-              color={Constant.Color.inActiveTintColor}
+              color={
+                theme === 'DARK'
+                  ? Constant.Color.whiteColor
+                  : Constant.Color.backgroundColor
+              }
             />
             <Text style={styles.screen_text}>
               {language === 'ENGLISH' ? Language[5].english : Language[5].hindi}
@@ -100,7 +166,11 @@ const CustomDrawer = ({navigation}) => {
         <FoundationIcon
           name="archive"
           size={25}
-          color={Constant.Color.inActiveTintColor}
+          color={
+            theme === 'DARK'
+              ? Constant.Color.whiteColor
+              : Constant.Color.backgroundColor
+          }
         />
         <Text style={styles.screen_text}>
           {language === 'ENGLISH' ? Language[6].english : Language[6].hindi}
@@ -114,7 +184,11 @@ const CustomDrawer = ({navigation}) => {
         <AntIcon
           name="delete"
           size={25}
-          color={Constant.Color.inActiveTintColor}
+          color={
+            theme === 'DARK'
+              ? Constant.Color.whiteColor
+              : Constant.Color.backgroundColor
+          }
         />
         <Text style={styles.screen_text}>
           {language === 'ENGLISH' ? Language[7].english : Language[7].hindi}
@@ -128,7 +202,11 @@ const CustomDrawer = ({navigation}) => {
         <AntIcon
           name="setting"
           size={25}
-          color={Constant.Color.inActiveTintColor}
+          color={
+            theme === 'DARK'
+              ? Constant.Color.whiteColor
+              : Constant.Color.backgroundColor
+          }
         />
         <Text style={styles.screen_text}>
           {language === 'ENGLISH' ? Language[8].english : Language[8].hindi}
@@ -142,7 +220,11 @@ const CustomDrawer = ({navigation}) => {
         <IonIcon
           name="help-circle"
           size={25}
-          color={Constant.Color.inActiveTintColor}
+          color={
+            theme === 'DARK'
+              ? Constant.Color.whiteColor
+              : Constant.Color.backgroundColor
+          }
         />
         <Text style={styles.screen_text}>
           {language === 'ENGLISH' ? Language[9].english : Language[9].hindi}
@@ -153,32 +235,3 @@ const CustomDrawer = ({navigation}) => {
 };
 
 export default CustomDrawer;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    marginLeft: Constant.margin.large,
-    marginTop: Constant.margin.large,
-    fontSize: Constant.fontSize.medium,
-  },
-  screen: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: Constant.margin.medium,
-    marginLeft: Constant.margin.medium,
-    padding: Constant.padding.small,
-    height: Constant.height.small,
-    borderRadius: Constant.borderRadius.large,
-  },
-  screen_text: {
-    marginLeft: Constant.margin.medium,
-    fontSize: Constant.fontSize.small,
-  },
-  create_label_container: {
-    borderColor: Constant.Color.activeTintColor,
-    borderTopWidth: Constant.borderWidth.small,
-    borderBottomWidth: Constant.borderWidth.small,
-  },
-});

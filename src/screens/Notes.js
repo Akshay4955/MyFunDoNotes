@@ -111,7 +111,7 @@ const Notes = ({navigation}) => {
           {user?.photoURL ? (
             <Image
               source={{uri: user?.photoURL}}
-              style={styles.notes_content}
+              style={styles.profile_image}
             />
           ) : (
             <Image
@@ -120,7 +120,7 @@ const Notes = ({navigation}) => {
                   ? {uri: userData.profilePic}
                   : require('../assets/a.png')
               }
-              style={styles.notes_content}
+              style={styles.profile_image}
             />
           )}
         </TouchableOpacity>

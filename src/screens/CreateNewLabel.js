@@ -27,6 +27,7 @@ const CreateNewLabel = ({navigation}) => {
   const styles = GlobalStyleSheet();
   receivedLabels = useSelector(data => data.LabelReducer);
   const language = useSelector(state => state.LanguageReducer);
+  const theme = useSelector(state => state.ThemeReducer);
   const getLabels = async () => {
     const fetchedLabels = await fetchLabels(user?.uid);
     dispatch(fetchingLabels(fetchedLabels));
@@ -83,6 +84,11 @@ const CreateNewLabel = ({navigation}) => {
           onChangeText={onChangeText}
           placeholder={
             language === 'ENGLISH' ? Language[5].english : Language[5].hindi
+          }
+          placeholderTextColor={
+            theme == 'DARK'
+              ? Constant.Color.whiteColor
+              : Constant.Color.backgroundColor
           }
           value={text}
         />

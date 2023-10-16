@@ -14,6 +14,6 @@ export const changeLanguage = value => {
   return {type: CHANGE_LANGUAGE, value: value};
 };
 
-export const changeTheme = () => {
-  return {type: CHANGE_THEME};
+export const changeTheme = value => {
+  return {type: CHANGE_THEME, value};
 };
