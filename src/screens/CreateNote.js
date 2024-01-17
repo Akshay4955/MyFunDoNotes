@@ -20,7 +20,7 @@ import {useSelector} from 'react-redux';
 const CreateNote = ({navigation}) => {
   const route = useRoute();
   const editData = route?.params.editData;
-  const theme = useSelector(state => state.LanguageReducer);
+  const theme = useSelector(state => state.ThemeReducer);
   const noteId = route?.params.noteId;
   const SqlNoteId = route?.params.id;
   const {user} = useContext(AuthContext);
@@ -31,11 +31,11 @@ const CreateNote = ({navigation}) => {
   const [pinnedData, setPinnedData] = useState(editData.pinnedData || false);
   const [archiveData, setArchiveData] = useState(editData.archiveData || false);
   const [deleteData, setDeleteData] = useState(editData.deleteData || false);
+  const [labels, setLabels] = useState(editData.selectedLabels || []);
   const [sqlNoteId, setSqlNoteId] = useState(SqlNoteId || 0);
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
-  const [date, setDate] = useState(editData?.reminderDate || {});
-  const [labels, setLabels] = useState(editData.selectedLabels || []);
+  const [date, setDate] = useState(editData.reminderDate || {});
   let newDate;
   {
     date === editData?.reminderDate && JSON.stringify(date) !== '{}'
@@ -109,7 +109,7 @@ const CreateNote = ({navigation}) => {
 
   useEffect(() => {
     navigation.addListener('focus', () => {
-      setLabels(editData.selectedLabels);
+      setLabels(editData.selectedLabels || []);
     });
   }, [user]);
   return (

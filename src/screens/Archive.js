@@ -39,7 +39,7 @@ const Archive = ({navigation}) => {
           <EntypoIcon name="menu" size={25} style={styles.notes_content} />
         </TouchableOpacity>
         <Text style={styles.note_type}>
-          {language === 'English' ? Language[11].english : Language[11].hindi}
+          {language === 'ENGLISH' ? Language[11].english : Language[11].hindi}
         </Text>
       </View>
       <FlatList
