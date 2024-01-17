@@ -11,7 +11,6 @@ export const addNote = async (
   labels,
   date,
 ) => {
-  console.log('Date is ', labels);
   await usersCollection.doc(uid).collection('Notes').add({
     title: title,
     data: data,
